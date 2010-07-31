@@ -2,7 +2,7 @@
 
 * home: http://github.com/proutils/wedge
 * code: http://github.com/proutils/wedge
-* talk: http://groups.google.com/group/proutils
+* talk: http://groups.google.com/group/rubyworks-mailinglist
 
 
 == DESCRIPTION
@@ -14,17 +14,17 @@ load managers to Ruby's standard load system (the #load and #require methods).
 == SYNOPSIS
 
 Wedge was written initially to provide the single capability of loading
-Ruby standard libraries without potetnial interference from installed
-gems. The code natrually evolved into something more generic, useful for
+Ruby standard libraries without potential interference from installed
+gems. The code naturally evolved into something more generic, useful for
 writing any kind of add-on load manager. The code for the Ruby wedge serves
-as a good exmaple of writing a wedge.
+as a good example of writing a wedge.
 
   require 'wedge/kernel'
   require 'rbconfig'
 
   Wedge.new :Ruby do
 
-    # Notice that rubylibdir takes precendence.
+    # Notice that rubylibdir takes precedence.
     LOCATIONS = ::RbConfig::CONFIG.values_at(
       'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
     )
@@ -64,14 +64,60 @@ operations. The secret is in the +options+ hash. If <code>options[:load]</code>
 resolves to true, then it is a +load+ operation, otherwise it is a +require+
 operation.
 
-As wedges are registed, they added to a list in order of registration. When
+As wedges are registered, they added to a list in order of registration. When
 #load or #require is called each wedge is tried in turn. The return value of
 #call controls how this loop proceeds. If the return value is +true+ then the
 load was successful, and the loop can break. If it is +false+ it means the
 loading has already been handled and the loop can also break. But if the
 return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
-fallsback to the original #load and #require calls.
+falls back to the original #load and #require calls.
+
+
+== Provided Wedges
+
+Wedge provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
+
+=== Ruby Wedge
+
+The Ruby wedge is considered standard fare. When you require 'wedge' it will
+load the wedge kernel and also the Ruby wedge.
+
+The Ruby wedge makes it possible to load a Ruby standard library without
+interference from installed gems or other package systems.
+
+  require 'wedge'
+
+  require 'ruby:ostruct'
+
+This will load the ostruct.rb script from the Ruby standard library regardless
+of whether some newbie dropped an ostruct.rb file in their projects lib/ 
+directory without understand the consequences.
+
+
+=== Gem Wedge
+
+The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
+of a gem's files from other gems.
+
+  require 'wedge/gem'
+
+  gem 'facets', '~>2.8'
+
+  require 'facets:string/margin'
+
+With this we can be sure that 'facets/string/margin' was loaded from the facets
+library regardless of whether some other gem put a 'facets/string/margin' file
+in their lib/ directory.
+
+To complement Wedge and it's built-in Gem Wedge, you can install the +gem-wedge+
+gem.
+
+  $ gem install gem-wedge
+
+This turn the Gem Wedge into a gem plug-in, so it will be automatically loaded
+whenever RubyGems is loaded. See the the +gem-wedge+ README[http://github.com/rubyworks/gem-wedge]
+file for more information about the Gem Wedge and why it is so useful.
 
 
 == INSTALL
