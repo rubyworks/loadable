@@ -1,0 +1,89 @@
+= Load Wedge
+
+* home: http://github.com/proutils/wedge
+* code: http://github.com/proutils/wedge
+* talk: http://groups.google.com/group/proutils
+
+
+== DESCRIPTION
+
+The wedge gem provides an easy to use interface for adding custom
+load managers to Ruby's standard load system (the #load and #require methods).
+
+
+== SYNOPSIS
+
+Wedge was written initially to provide the single capability of loading
+Ruby standard libraries without potetnial interference from installed
+gems. The code natrually evolved into something more generic, useful for
+writing any kind of add-on load manager. The code for the Ruby wedge serves
+as a good exmaple of writing a wedge.
+
+  require 'wedge/kernel'
+  require 'rbconfig'
+
+  Wedge.new :Ruby do
+
+    # Notice that rubylibdir takes precendence.
+    LOCATIONS = ::RbConfig::CONFIG.values_at(
+      'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
+    )
+
+    #
+    def call(fname, options={})
+      return unless md = /^ruby[:\/]/.match(fname)
+
+      file = md.post_match
+
+      LOCATIONS.each do |loadpath|
+        if path = find(loadpath, file, options)
+          return super(path, options)
+        end
+      end
+
+      raise LoadError, "no such file to load -- #{fname}"
+    end
+
+  end
+
+Wedge.new is actually just a helper method. One could write a load wedge without
+it as the interface is very simple. Any object the responds to #call taking
+parameters of <code>(fname, options={})</code> can be used as a load wedge. 
+Simply register it via:
+
+  Wedge.register(mywedge)
+
+Wedge.new makes it a bit easier by automatically creating an object extended by
+the Wedge::Helper module, which provides a few methods that can be generally
+useful to any load manager, and then registers the object as a load wedge
+automatically. As the example above shows, it also allows one to name their
+wedge, which can be useful for debugging load issues.
+
+You might wonder how the single method, #call, handles both #load and #require
+operations. The secret is in the +options+ hash. If <code>options[:load]</code>
+resolves to true, then it is a +load+ operation, otherwise it is a +require+
+operation.
+
+As wedges are registed, they added to a list in order of registration. When
+#load or #require is called each wedge is tried in turn. The return value of
+#call controls how this loop proceeds. If the return value is +true+ then the
+load was successful, and the loop can break. If it is +false+ it means the
+loading has already been handled and the loop can also break. But if the
+return value is +nil+, it means the wedge does not apply and the loop should
+continue. If all wedges have been tried and all have returned +nil+ then it
+fallsback to the original #load and #require calls.
+
+
+== INSTALL
+
+  $ gem install wedge
+
+
+== LEGAL
+
+Wedge, Copyright (c) 2010 Thomas Sawyer
+
+Wedge is distributed under the terms of the Apache 2.0 License.
+
+See LICENSE file for more details.
+

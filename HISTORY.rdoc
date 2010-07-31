@@ -1,0 +1,10 @@
+= RELEASE HISTORY
+
+== 1.0.0 / 2010-08-01
+
+Initial release of Wedge, a tool for easily creating Ruby load managers.
+
+Changes:
+
+* Happy Brithday!
+

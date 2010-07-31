@@ -1,0 +1,17 @@
+title  : Wedge
+suite  : rubyworks
+summary: Customize The Load
+contact: trans <transfire@gmail.com>
+authors: Thomas Sawyer
+license: Apache 2.0
+created: 2010-07-21
+
+description:
+  Wedge makes it easy to write custom loaders.
+
+resources:
+  home: http://rubyworks.github.com/wedge
+  repo: git://github.com/rubyworks/wedge.git
+
+copyright: Copyright (c) 2010 Thomas Sawyer
+
