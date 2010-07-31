@@ -1,8 +1,8 @@
 = Load Wedge
 
-* home: http://github.com/proutils/wedge
-* code: http://github.com/proutils/wedge
-* talk: http://groups.google.com/group/rubyworks-mailinglist
+* +home+: http://github.com/proutils/wedge
+* +code+: http://github.com/proutils/wedge
+* +talk+: http://groups.google.com/group/rubyworks-mailinglist
 
 
 == DESCRIPTION

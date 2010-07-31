@@ -1,0 +1,12 @@
+#!mast -x Syckfile .ruby bin expo lib test [A-Z]*
+.ruby
+lib/wedge/gem.rb
+lib/wedge/kernel.rb
+lib/wedge/ruby.rb
+lib/wedge.rb
+test/fixture/abbrev.rb
+test/wedge.rb
+HISTORY.rdoc
+PROFILE
+PACKAGE
+README.rdoc
