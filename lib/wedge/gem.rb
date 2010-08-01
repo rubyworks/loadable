@@ -22,9 +22,13 @@ Wedge.new :Gem do
 
     gem_spec = Gem.loaded_specs[gem_name]
 
+p gem_spec
+
     file = nil
     file ||= Gem.searcher.matching_files(gem_spec, gem_file).first
     file ||= Gem.searcher.matching_files(gem_spec, File.join(gem_name, gem_file)).first
+
+p file
 
     if file
       super(file, options)

@@ -73,12 +73,18 @@ class Wedge
         abspath = File.join(loadpath, relname)
         File.exist?(abspath) ? abspath : nil
       else
-        SUFFIXES.each do |ext|
+        suffixes.each do |ext|
           abspath = File.join(loadpath, relname + ext)
           return abspath if File.exist?(abspath)
         end
       end
       nil
+    end
+
+    # You can override this method in in your wedge and use #find
+    # for other extension types.
+    def suffixes
+      SUFFIXES
     end
 
     #
