@@ -1,12 +1,17 @@
-#!mast -x Syckfile .ruby bin expo lib test [A-Z]*
+#!mast -x Syckfile .ruby bin lib meta test [A-Z]*
 .ruby
 lib/wedge/gem.rb
 lib/wedge/kernel.rb
+lib/wedge/meta/data.rb
+lib/wedge/meta/package
+lib/wedge/meta/profile
 lib/wedge/ruby.rb
 lib/wedge.rb
+meta/data.rb
+meta/package
+meta/profile
 test/fixture/abbrev.rb
 test/wedge.rb
 HISTORY.rdoc
-PROFILE
-PACKAGE
+LICENSE
 README.rdoc
