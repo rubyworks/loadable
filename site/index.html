@@ -1,0 +1,80 @@
+<html>
+<body>
+<head>
+  <title>Load Wedge</title>
+  <style>
+    body { margin: 0; padding 0; font-family: helvetica; }
+    p { text-align: justify; }
+    pre { margin: 30px 0 0 0; font-size: 30px; }
+    .frame {
+       border-top: 120px solid #232021;
+       border-left: 100px solid #232021;
+       padding-top: 20px;
+    }
+    #blurb { font-size: 42px; font-weight: bold; }
+    #nav { 
+      font-size: 42px;
+      position: absolute; top: 30px; left: 600px;"
+    }
+    #nav a { color: yellow; text-decoration: none; }
+    #nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="frame">
+
+  <div style="width: 600px; padding-left: 550px;">
+
+    <p id="blurb">
+      Create custom Load Wedges that easily and safely override #load and #require.
+    </p>
+
+  </div>
+
+  <div style="padding-left: 100px; padding-top: 72px;">
+    <p></p>
+
+    <pre>
+    # wedge/ruby.rb
+
+    require 'wedge/kernel'
+    require 'rbconfig'
+
+    Wedge.new :Ruby do
+
+      LOCATIONS = ::RbConfig::CONFIG.values_at(
+        'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
+      )
+
+      def call(fname, options={})
+        return unless md = /^ruby[:\/]/.match(fname)
+
+        file = md.post_match
+
+        LOCATIONS.each do |loadpath|
+          if path = find(loadpath, file, options)
+            return super(path, options)
+          end
+        end
+
+        raise LoadError, "no such file to load -- #{fname}"
+      end
+
+    end
+    </pre>
+  </div>
+
+</div>
+
+<img src="corner.jpg" style="position: absolute; left:0; top:0;" />
+
+<div id="nav">
+  <a href="doc/api">API</a>  &middot;
+  <a href="doc/qed">QED</a>  &middot;
+  <a href="http://wiki.github.com/rubyworks/wedge">WIKI</a> &middot;
+  <a href="http://github.com/rubyworks/wedge">CODE</a>
+</div>
+
+</body>
+</html>
