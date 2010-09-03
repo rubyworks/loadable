@@ -1,5 +1,15 @@
 = RELEASE HISTORY
 
+== 1.0.0 / 2010-09-03
+
+This release is simply a maintenance release, updating some project metadata.
+No functionality has been changed.
+
+Changes:
+
+* Uupdate project metadata to latest POM.
+
+
 == 1.0.0 / 2010-08-01
 
 Initial release of Wedge, a tool for easily creating custom
