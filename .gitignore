@@ -1,7 +1,5 @@
-.cache
-MANIFEST
 log
-doc/qedoc
-doc/rdoc
-doc/ri
+ri
 pkg
+tmp
+site/docs
