@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Wedge</title>
+
+  <link rel="SHORTCUT ICON" href="assets/icon/ruby.png">
+
+  <link type="text/css" rel="stylesheet" href="assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      $('#documentation pre').wrapInner('<code></code>');
+      hljs.tabReplace = '    ';
+      hljs.initHighlightingOnLoad('ruby');
+
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind( "click", highlightClickTarget );
+    });
+  </script>
+</head>
+<body class="indexpage">
+<div id="main">
+
+  
+  <div class="head">
+    <h1>
+      <img src="assets/icon/project.png" align="absmiddle">&nbsp;
+      <a href="index.html">Wedge</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="HISTORY_rdoc.html">HISTORY.rdoc</a></li>
+        
+          <li class="file"><a href="README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li class="class"><a href="Wedge.html">Wedge</a></li>
+        
+          <li class="module"><a href="Wedge/Helper.html">Wedge::Helper</a></li>
+        
+          <li class="module"><a href="Kernel.html">Kernel</a></li>
+        
+          <li class="class"><a href="Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      <!-- METHODS -->
+      <div id="methodindex-section" class="section project-section">
+        <h3 class="section-header">Method Index
+          <span class="search-toggle"><img src="assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Wedge::Helper</span>
+              <a href="Wedge/Helper.html#method-c-extended">::extended</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Wedge</span>
+              <a href="Wedge.html#method-c-load">::load</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Wedge</span>
+              <a href="Wedge.html#method-c-new">::new</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Wedge</span>
+              <a href="Wedge.html#method-c-register">::register</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Wedge</span>
+              <a href="Wedge.html#method-c-registry">::registry</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Wedge</span>
+              <a href="Wedge.html#method-c-require">::require</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Object</span>
+              <a href="Object.html#method-i-call">#call</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Wedge::Helper</span>
+              <a href="Wedge/Helper.html#method-i-call">#call</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Object</span>
+              <a href="Object.html#method-i-call">#call</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Wedge::Helper</span>
+              <a href="Wedge/Helper.html#method-i-find">#find</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Kernel</span>
+              <a href="Kernel.html#method-i-load">#load</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Kernel</span>
+              <a href="Kernel.html#method-i-load_without_wedge">#load_without_wedge</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Wedge::Helper</span>
+              <a href="Wedge/Helper.html#method-i-raise_load_error">#raise_load_error</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Kernel</span>
+              <a href="Kernel.html#method-i-require">#require</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Kernel</span>
+              <a href="Kernel.html#method-i-require_without_wedge">#require_without_wedge</a>
+            </li>
+          
+        </ul>
+      </div>
+
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.3.0
+      <br/><br/> 
+    </div>
+  </div>
+
+  
+  <div id="documentation">
+    <h1>Load <a href="Wedge.html">Wedge</a></h1>
+<ul>
+<li><p>
+<tt>home</tt>: <a
+href="http://github.com/proutils/wedge">github.com/proutils/wedge</a>
+</p>
+</li>
+<li><p>
+<tt>code</tt>: <a
+href="http://github.com/proutils/wedge">github.com/proutils/wedge</a>
+</p>
+</li>
+<li><p>
+<tt>talk</tt>: <a
+href="http://groups.google.com/group/rubyworks-mailinglist">groups.google.com/group/rubyworks-mailinglist</a>
+</p>
+</li>
+</ul>
+<h2>DESCRIPTION</h2>
+<p>
+The wedge gem provides an easy to use interface for adding custom load
+managers to Ruby&#8217;s standard load system (the # and # methods).
+</p>
+<h2>SYNOPSIS</h2>
+<p>
+<a href="Wedge.html">Wedge</a> was written initially to provide the single
+capability of loading Ruby standard libraries without potential
+interference from installed gems. The code naturally evolved into something
+more generic, useful for writing any kind of add-on load manager. The code
+for the Ruby wedge serves as a good example of writing a wedge.
+</p>
+<pre>
+  require 'wedge/kernel'
+  require 'rbconfig'
+
+  Wedge.new :Ruby do
+
+    # Notice that rubylibdir takes precedence.
+    LOCATIONS = ::RbConfig::CONFIG.values_at(
+      'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
+    )
+
+    #
+    def call(fname, options={})
+      return unless md = /^ruby[:\/]/.match(fname)
+
+      file = md.post_match
+
+      LOCATIONS.each do |loadpath|
+        if path = find(loadpath, file, options)
+          return super(path, options)
+        end
+      end
+
+      raise LoadError, &quot;no such file to load -- #{fname}&quot;
+    end
+
+  end
+</pre>
+<p>
+Wedge.new is actually just a helper method. One could write a load wedge
+without it as the interface is very simple. Any object the responds to #
+taking parameters of <tt>(fname, options={})</tt> can be used as a load
+wedge.  Simply register it via:
+</p>
+<pre>
+  Wedge.register(mywedge)
+</pre>
+<p>
+Wedge.new makes it a bit easier by automatically creating an object
+extended by the <a href="Wedge/Helper.html">Wedge::Helper</a> module, which
+provides a few methods that can be generally useful to any load manager,
+and then registers the object as a load wedge automatically. As the example
+above shows, it also allows one to name their wedge, which can be useful
+for debugging load issues.
+</p>
+<p>
+You might wonder how the single method, #, handles both # and # operations.
+The secret is in the <tt>options</tt> hash. If <tt>options[:load]</tt>
+resolves to true, then it is a <tt>load</tt> operation, otherwise it is a
+<tt>require</tt> operation.
+</p>
+<p>
+As wedges are registered, they added to a list in order of registration.
+When # or # is called each wedge is tried in turn. The return value of #
+controls how this loop proceeds. If the return value is <tt>true</tt> then
+the load was successful, and the loop can break. If it is <tt>false</tt> it
+means the loading has already been handled and the loop can also break. But
+if the return value is <tt>nil</tt>, it means the wedge does not apply and
+the loop should continue. If all wedges have been tried and all have
+returned <tt>nil</tt> then it falls back to the original # and # calls.
+</p>
+<h2>Provided Wedges</h2>
+<p>
+<a href="Wedge.html">Wedge</a> provides two wedges out-of-the-box, the Ruby
+wedge and the Gem wedge.
+</p>
+<h3>Ruby <a href="Wedge.html">Wedge</a></h3>
+<p>
+The Ruby wedge is considered standard fare. When you require
+&#8216;wedge&#8217; it will load the wedge kernel and also the Ruby wedge.
+</p>
+<p>
+The Ruby wedge makes it possible to load a Ruby standard library without
+interference from installed gems or other package systems.
+</p>
+<pre>
+  require 'wedge'
+
+  require 'ruby:ostruct'
+</pre>
+<p>
+This will load the ostruct.rb script from the Ruby standard library
+regardless of whether some newbie dropped an ostruct.rb file in their
+projects lib/  directory without understand the consequences.
+</p>
+<h3>Gem <a href="Wedge.html">Wedge</a></h3>
+<p>
+The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
+of a gem&#8217;s files from other gems.
+</p>
+<pre>
+  require 'wedge/gem'
+
+  gem 'facets', '~&gt;2.8'
+
+  require 'facets:string/margin'
+</pre>
+<p>
+With this we can be sure that &#8216;facets/string/margin&#8217; was loaded
+from the facets library regardless of whether some other gem put a
+&#8216;facets/string/margin&#8217; file in their lib/ directory.
+</p>
+<p>
+To complement <a href="Wedge.html">Wedge</a> and it&#8217;s built-in Gem <a
+href="Wedge.html">Wedge</a>, you can install the <tt>gem-wedge</tt> gem.
+</p>
+<pre>
+  $ gem install gem-wedge
+</pre>
+<p>
+This turn the Gem <a href="Wedge.html">Wedge</a> into a gem plug-in, so it
+will be automatically loaded whenever RubyGems is loaded. See the the
+<tt>gem-wedge</tt> <a
+href="http://github.com/rubyworks/gem-wedge">README</a> file for more
+information about the Gem <a href="Wedge.html">Wedge</a> and why it is so
+useful.
+</p>
+<h2>INSTALL</h2>
+<pre>
+  $ gem install wedge
+</pre>
+<h2>LEGAL</h2>
+<p>
+<a href="Wedge.html">Wedge</a>, Copyright &#169; 2010 Thomas Sawyer
+</p>
+<p>
+<a href="Wedge.html">Wedge</a> is distributed under the terms of the Apache
+2.0 License.
+</p>
+<p>
+See LICENSE file for more details.
+</p>
+
+  </div>
+  
+
+</div>
+</body>
+</html>
+
