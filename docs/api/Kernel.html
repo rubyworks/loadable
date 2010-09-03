@@ -119,6 +119,8 @@
         
           <li class="file"><a href="./HISTORY_rdoc.html">HISTORY.rdoc</a></li>
         
+          <li class="file"><a href="./LICENSE.html">LICENSE</a></li>
+        
           <li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
         
         </ul>
@@ -206,14 +208,14 @@
           <div class="method-source-code"
             id="load-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/wedge/kernel.rb, line 118</span>
-118:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>={})
-119:     <span class="ruby-identifier">success</span> = <span class="ruby-constant">Wedge</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>)
-120:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">success</span>.<span class="ruby-identifier">nil?</span>
-121:       <span class="ruby-identifier">success</span> = <span class="ruby-identifier">load_without_wedge</span>(<span class="ruby-identifier">fname</span>)
-122:     <span class="ruby-keyword kw">end</span>
-123:     <span class="ruby-identifier">success</span>
-124:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/wedge/kernel.rb, line 124</span>
+124:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>={})
+125:     <span class="ruby-identifier">success</span> = <span class="ruby-constant">Wedge</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>)
+126:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">success</span>.<span class="ruby-identifier">nil?</span>
+127:       <span class="ruby-identifier">success</span> = <span class="ruby-identifier">load_without_wedge</span>(<span class="ruby-identifier">fname</span>)
+128:     <span class="ruby-keyword kw">end</span>
+129:     <span class="ruby-identifier">success</span>
+130:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -269,14 +271,14 @@
           <div class="method-source-code"
             id="require-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/wedge/kernel.rb, line 109</span>
-109:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>={})
-110:     <span class="ruby-identifier">success</span> = <span class="ruby-constant">Wedge</span>.<span class="ruby-identifier">require</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>)
-111:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">success</span>.<span class="ruby-identifier">nil?</span>
-112:       <span class="ruby-identifier">success</span> = <span class="ruby-identifier">require_without_wedge</span>(<span class="ruby-identifier">fname</span>)
-113:     <span class="ruby-keyword kw">end</span>
-114:     <span class="ruby-identifier">success</span>
-115:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/wedge/kernel.rb, line 115</span>
+115:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>={})
+116:     <span class="ruby-identifier">success</span> = <span class="ruby-constant">Wedge</span>.<span class="ruby-identifier">require</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-identifier">options</span>)
+117:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">success</span>.<span class="ruby-identifier">nil?</span>
+118:       <span class="ruby-identifier">success</span> = <span class="ruby-identifier">require_without_wedge</span>(<span class="ruby-identifier">fname</span>)
+119:     <span class="ruby-keyword kw">end</span>
+120:     <span class="ruby-identifier">success</span>
+121:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>

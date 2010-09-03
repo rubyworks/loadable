@@ -54,6 +54,8 @@
         
           <li class="file"><a href="HISTORY_rdoc.html">HISTORY.rdoc</a></li>
         
+          <li class="file"><a href="LICENSE.html">LICENSE</a></li>
+        
           <li class="file"><a href="README_rdoc.html">README.rdoc</a></li>
         
         </ul>
@@ -141,14 +143,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Object</span>
-              <a href="Object.html#method-i-call">#call</a>
+              <span class="method-parent-aside">Wedge::Helper</span>
+              <a href="Wedge/Helper.html#method-i-call">#call</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Wedge::Helper</span>
-              <a href="Wedge/Helper.html#method-i-call">#call</a>
+              <span class="method-parent-aside">Object</span>
+              <a href="Object.html#method-i-call">#call</a>
             </li>
           
             
@@ -193,6 +195,12 @@
               <a href="Kernel.html#method-i-require_without_wedge">#require_without_wedge</a>
             </li>
           
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Wedge::Helper</span>
+              <a href="Wedge/Helper.html#method-i-suffixes">#suffixes</a>
+            </li>
+          
         </ul>
       </div>
 
@@ -231,7 +239,8 @@ href="http://groups.google.com/group/rubyworks-mailinglist">groups.google.com/gr
 <h2>DESCRIPTION</h2>
 <p>
 The wedge gem provides an easy to use interface for adding custom load
-managers to Ruby&#8217;s standard load system (the # and # methods).
+managers to Ruby&#8217;s standard load system (the load and require
+methods).
 </p>
 <h2>SYNOPSIS</h2>
 <p>
@@ -271,7 +280,7 @@ for the Ruby wedge serves as a good example of writing a wedge.
 </pre>
 <p>
 Wedge.new is actually just a helper method. One could write a load wedge
-without it as the interface is very simple. Any object the responds to #
+without it as the interface is very simple. Any object the responds to call
 taking parameters of <tt>(fname, options={})</tt> can be used as a load
 wedge.  Simply register it via:
 </p>
@@ -287,20 +296,21 @@ above shows, it also allows one to name their wedge, which can be useful
 for debugging load issues.
 </p>
 <p>
-You might wonder how the single method, #, handles both # and # operations.
-The secret is in the <tt>options</tt> hash. If <tt>options[:load]</tt>
-resolves to true, then it is a <tt>load</tt> operation, otherwise it is a
-<tt>require</tt> operation.
+You might wonder how the single method, call, handles both load and require
+operations. The secret is in the <tt>options</tt> hash. If
+<tt>options[:load]</tt> resolves to true, then it is a <tt>load</tt>
+operation, otherwise it is a <tt>require</tt> operation.
 </p>
 <p>
-As wedges are registered, they added to a list in order of registration.
-When # or # is called each wedge is tried in turn. The return value of #
-controls how this loop proceeds. If the return value is <tt>true</tt> then
-the load was successful, and the loop can break. If it is <tt>false</tt> it
-means the loading has already been handled and the loop can also break. But
-if the return value is <tt>nil</tt>, it means the wedge does not apply and
-the loop should continue. If all wedges have been tried and all have
-returned <tt>nil</tt> then it falls back to the original # and # calls.
+As wedges are registered, they are added to a list in order of
+registration. When load or require is called each wedge is tried in turn.
+The return value of call controls how this loop proceeds. If the return
+value is <tt>true</tt> then the load was successful, and the loop can
+break. If it is <tt>false</tt> it means the loading has already been
+handled and the loop can also break. But if the return value is
+<tt>nil</tt>, it means the wedge does not apply and the loop should
+continue. If all wedges have been tried and all have returned <tt>nil</tt>
+then it falls back to the original load and require calls.
 </p>
 <h2>Provided Wedges</h2>
 <p>
@@ -371,7 +381,7 @@ useful.
 2.0 License.
 </p>
 <p>
-See LICENSE file for more details.
+See <a href="LICENSE.html">LICENSE</a> file for more details.
 </p>
 
   </div>

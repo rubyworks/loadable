@@ -102,6 +102,11 @@
               <a href="#method-i-raise_load_error">#raise_load_error</a>
             </li>
           
+            
+            <li class="method">
+              <a href="#method-i-suffixes">#suffixes</a>
+            </li>
+          
         </ul>
       </div>
       
@@ -118,6 +123,8 @@
         <ul>
         
           <li class="file"><a href="../HISTORY_rdoc.html">HISTORY.rdoc</a></li>
+        
+          <li class="file"><a href="../LICENSE.html">LICENSE</a></li>
         
           <li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
         
@@ -309,7 +316,7 @@ match is found the full path to the file is returned, otherwise
 73:         <span class="ruby-identifier">abspath</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">loadpath</span>, <span class="ruby-identifier">relname</span>)
 74:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">abspath</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">abspath</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
 75:       <span class="ruby-keyword kw">else</span>
-76:         <span class="ruby-constant">SUFFIXES</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+76:         <span class="ruby-identifier">suffixes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
 77:           <span class="ruby-identifier">abspath</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">loadpath</span>, <span class="ruby-identifier">relname</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ext</span>)
 78:           <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">abspath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">abspath</span>)
 79:         <span class="ruby-keyword kw">end</span>
@@ -344,10 +351,45 @@ match is found the full path to the file is returned, otherwise
           <div class="method-source-code"
             id="raise-load-error-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/wedge/kernel.rb, line 85</span>
-85:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">raise_load_error</span>(<span class="ruby-identifier">fname</span>)
-86:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">LoadError</span>, <span class="ruby-node">&quot;no such file to load -- #{fname}&quot;</span>
-87:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/wedge/kernel.rb, line 91</span>
+91:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">raise_load_error</span>(<span class="ruby-identifier">fname</span>)
+92:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">LoadError</span>, <span class="ruby-node">&quot;no such file to load -- #{fname}&quot;</span>
+93:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="suffixes-method" class="method-detail ">
+        <a name="method-i-suffixes"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">suffixes</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+You can override this method in in your wedge and use <a
+href="Helper.html#method-i-find">find</a> for other extension types.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="suffixes-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/wedge/kernel.rb, line 86</span>
+86:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">suffixes</span>
+87:       <span class="ruby-constant">SUFFIXES</span>
+88:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
