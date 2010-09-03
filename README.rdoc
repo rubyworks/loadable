@@ -64,9 +64,9 @@ operations. The secret is in the +options+ hash. If <code>options[:load]</code>
 resolves to true, then it is a +load+ operation, otherwise it is a +require+
 operation.
 
-As wedges are registered, they added to a list in order of registration. When
-#load or #require is called each wedge is tried in turn. The return value of
-#call controls how this loop proceeds. If the return value is +true+ then the
+As wedges are registered, they are added to a list in order of registration.
+When #load or #require is called each wedge is tried in turn. The return value
+of #call controls how this loop proceeds. If the return value is +true+ then the
 load was successful, and the loop can break. If it is +false+ it means the
 loading has already been handled and the loop can also break. But if the
 return value is +nil+, it means the wedge does not apply and the loop should
