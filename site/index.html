@@ -2,77 +2,83 @@
 <head>
   <link href="assets/icon.jpg" rel="icon"/>
   <title>Load Wedge</title>
-  <link href="assets/prettify/prettify.css" type="text/css" rel="stylesheet" />
-  <script type="text/javascript" src="assets/prettify/prettify.js"></script>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://github.com/balupton/jquery-syntaxhighlighter/raw/master/scripts/jquery.syntaxhighlighter.min.js"></script>
 
   <style>
     body { margin: 0; padding 0; font-family: helvetica; }
     p { text-align: justify; }
-    pre { margin: 0 90px 0 -52px; padding: 20px 0; font-size: 24px; }
+    li p { margin: 0; padding: 0; }
+
     .frame {
        border-top: 120px solid #232021;
        border-left: 100px solid #232021;
        padding-top: 20px;
     }
-    #blurb { font-size: 42px; font-weight: bold; }
+    .inner { width: 800px; margin-left: 230px; }
+    .tab { padding-top: 10px; margin: 0 100px 0 0; }
+
+    #blurb { font-size: 42px; font-weight: bold; width: 600px; }
+
     #nav { 
-      font-size: 36px;
-      position: absolute; top: 60px; left: 300px;"
+      font-size: 24px;
+      position: absolute; top: 72px; left: 300px;
+      color: red;
     }
     #nav a { color: white; text-decoration: none; }
     #nav a:hover { text-decoration: underline; }
+
+    #example pre { margin: 0 90px 0 0; padding: 20px 0; font-size: 24px; }
+
+    #footer { padding: 10px 0; }
   </style>
+
+
+  <script type="text/javascript">
+    $.SyntaxHighlighter.init();
+    function show(name) {
+      $('.tab').hide();
+      $('#' + name).show();
+    };
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#readme').load('readme.html', function(){
+        $('pre').addClass('highlight');
+      });
+      $('#example').load('example.html');
+    });
+  </script>
 </head>
 
-<body onload="prettyPrint();">
+<body>
 
 <div class="frame">
+  <div class="inner">
+    <div id="blurb">
+      <p>Create custom Load Wedges that easily and safely override #load and #require.</p>
+    </div>
 
-  <div style="width: 600px; padding-left: 250px;">
+    <div id="readme" class="tab">
+    </div>
 
-    <p id="blurb">
-      Create custom Load Wedges that easily and safely override #load and #require.
-    </p>
+    <div id="example" class="tab" style="display: none;">
+    </div>
 
+    <div id="footer">
+      Copyright &copy; 2010 Thomas Sawyer
+    </div>
   </div>
-
-  <div style="padding-left: 250px; padding-top: 50px;">
-
-    <pre class="prettyprint">
-    # wedge/ruby.rb
-
-    require 'wedge/kernel'
-    require 'rbconfig'
-
-    Wedge.new :Ruby do
-
-      LOCATIONS = ::RbConfig::CONFIG.values_at(
-        'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
-      )
-
-      def call(fname, options={})
-        return unless md = /^ruby[:\/]/.match(fname)
-
-        file = md.post_match
-
-        LOCATIONS.each do |loadpath|
-          if path = find(loadpath, file, options)
-            return super(path, options)
-          end
-        end
-
-        raise LoadError, "no such file to load -- #{fname}"
-      end
-
-    end
-    </pre>
-  </div>
-
 </div>
 
 <img src="assets/corner.jpg" style="position: absolute; left:0; top:5px; height: 200px;" />
 
 <div id="nav">
+  <a href="javascript: show('readme');">README</a> &middot;
+  <a href="javascript: show('example');">EXAMPLE</a>
+  &nbsp;  &nbsp;
   <a href="docs/api">API</a>  &middot;
   <!-- <a href="doc/qed">QED</a>  &middot; -->
   <a href="http://wiki.github.com/rubyworks/wedge">WIKI</a> &middot;
