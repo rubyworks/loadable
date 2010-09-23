@@ -1,0 +1,160 @@
+<h1>WEDGE README</h1>
+<ul>
+<li><p>
+<tt>home</tt>: <a
+href="http://github.com/proutils/wedge">github.com/proutils/wedge</a>
+</p>
+</li>
+<li><p>
+<tt>code</tt>: <a
+href="http://github.com/proutils/wedge">github.com/proutils/wedge</a>
+</p>
+</li>
+<li><p>
+<tt>talk</tt>: <a
+href="http://groups.google.com/group/rubyworks-mailinglist">groups.google.com/group/rubyworks-mailinglist</a>
+</p>
+</li>
+</ul>
+<h2>DESCRIPTION</h2>
+<p>
+The wedge gem provides an easy to use interface for adding custom load
+managers to Ruby&#8217;s standard load system (the #load and #require
+methods).
+</p>
+<h2>SYNOPSIS</h2>
+<p>
+Wedge was written initially to provide the single capability of loading
+Ruby standard libraries without potential interference from installed gems.
+The code naturally evolved into something more generic, useful for writing
+any kind of add-on load manager. The code for the Ruby wedge serves as a
+good example of writing a wedge.
+</p>
+<pre>
+  require 'wedge/kernel'
+  require 'rbconfig'
+
+  Wedge.new :Ruby do
+
+    # Notice that rubylibdir takes precedence.
+    LOCATIONS = ::RbConfig::CONFIG.values_at(
+      'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
+    )
+
+    #
+    def call(fname, options={})
+      return unless md = /^ruby[:\/]/.match(fname)
+
+      file = md.post_match
+
+      LOCATIONS.each do |loadpath|
+        if path = find(loadpath, file, options)
+          return super(path, options)
+        end
+      end
+
+      raise LoadError, &quot;no such file to load -- #{fname}&quot;
+    end
+
+  end
+</pre>
+<p>
+Wedge.new is actually just a helper method. One could write a load wedge
+without it as the interface is very simple. Any object the responds to
+#call taking parameters of <tt>(fname, options={})</tt> can be used as a
+load wedge.  Simply register it via:
+</p>
+<pre>
+  Wedge.register(mywedge)
+</pre>
+<p>
+Wedge.new makes it a bit easier by automatically creating an object
+extended by the Wedge::Helper module, which provides a few methods that can
+be generally useful to any load manager, and then registers the object as a
+load wedge automatically. As the example above shows, it also allows one to
+name their wedge, which can be useful for debugging load issues.
+</p>
+<p>
+You might wonder how the single method, #call, handles both #load and
+#require operations. The secret is in the <tt>options</tt> hash. If
+<tt>options[:load]</tt> resolves to true, then it is a <tt>load</tt>
+operation, otherwise it is a <tt>require</tt> operation.
+</p>
+<p>
+As wedges are registered, they are added to a list in order of
+registration. When #load or #require is called each wedge is tried in turn.
+The return value of #call controls how this loop proceeds. If the return
+value is <tt>true</tt> then the load was successful, and the loop can
+break. If it is <tt>false</tt> it means the loading has already been
+handled and the loop can also break. But if the return value is
+<tt>nil</tt>, it means the wedge does not apply and the loop should
+continue. If all wedges have been tried and all have returned <tt>nil</tt>
+then it falls back to the original #load and #require calls.
+</p>
+<h2>Provided Wedges</h2>
+<p>
+Wedge provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
+</p>
+<h3>Ruby Wedge</h3>
+<p>
+The Ruby wedge is considered standard fare. When you require
+&#8216;wedge&#8217; it will load the wedge kernel and also the Ruby wedge.
+</p>
+<p>
+The Ruby wedge makes it possible to load a Ruby standard library without
+interference from installed gems or other package systems.
+</p>
+<pre>
+  require 'wedge'
+
+  require 'ruby:ostruct'
+</pre>
+<p>
+This will load the ostruct.rb script from the Ruby standard library
+regardless of whether some newbie dropped an ostruct.rb file in their
+projects lib/  directory without understand the consequences.
+</p>
+<h3>Gem Wedge</h3>
+<p>
+The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
+of a gem&#8217;s files from other gems.
+</p>
+<pre>
+  require 'wedge/gem'
+
+  gem 'facets', '~&gt;2.8'
+
+  require 'facets:string/margin'
+</pre>
+<p>
+With this we can be sure that &#8216;facets/string/margin&#8217; was loaded
+from the facets library regardless of whether some other gem put a
+&#8216;facets/string/margin&#8217; file in their lib/ directory.
+</p>
+<p>
+To complement Wedge and it&#8217;s built-in Gem Wedge, you can install the
+<tt>gem-wedge</tt> gem.
+</p>
+<pre>
+  $ gem install gem-wedge
+</pre>
+<p>
+This turn the Gem Wedge into a gem plug-in, so it will be automatically
+loaded whenever RubyGems is loaded. See the the <tt>gem-wedge</tt> <a
+href="http://github.com/rubyworks/gem-wedge">README</a> file for more
+information about the Gem Wedge and why it is so useful.
+</p>
+<h2>INSTALL</h2>
+<pre>
+  $ gem install wedge
+</pre>
+<h2>LEGAL</h2>
+<p>
+Wedge, Copyright &#169; 2010 Thomas Sawyer
+</p>
+<p>
+Wedge is distributed under the terms of the Apache 2.0 License.
+</p>
+<p>
+See LICENSE file for more details.
+</p>
