@@ -1,12 +1,14 @@
 <html>
-<body>
 <head>
-  <link href="assets/icon.png" rel="icon"/>
+  <link href="assets/icon.jpg" rel="icon"/>
   <title>Load Wedge</title>
+  <link href="assets/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="assets/prettify/prettify.js"></script>
+
   <style>
     body { margin: 0; padding 0; font-family: helvetica; }
     p { text-align: justify; }
-    pre { margin: 30px 0 0 0; font-size: 30px; }
+    pre { margin: 0 90px 0 -52px; padding: 20px 0; font-size: 24px; }
     .frame {
        border-top: 120px solid #232021;
        border-left: 100px solid #232021;
@@ -14,18 +16,19 @@
     }
     #blurb { font-size: 42px; font-weight: bold; }
     #nav { 
-      font-size: 42px;
-      position: absolute; top: 35px; left: 650px;"
+      font-size: 36px;
+      position: absolute; top: 60px; left: 300px;"
     }
-    #nav a { color: yellow; text-decoration: none; }
+    #nav a { color: white; text-decoration: none; }
     #nav a:hover { text-decoration: underline; }
   </style>
 </head>
-<body>
+
+<body onload="prettyPrint();">
 
 <div class="frame">
 
-  <div style="width: 600px; padding-left: 550px;">
+  <div style="width: 600px; padding-left: 250px;">
 
     <p id="blurb">
       Create custom Load Wedges that easily and safely override #load and #require.
@@ -33,10 +36,9 @@
 
   </div>
 
-  <div style="padding-left: 100px; padding-top: 72px;">
-    <p></p>
+  <div style="padding-left: 250px; padding-top: 50px;">
 
-    <pre>
+    <pre class="prettyprint">
     # wedge/ruby.rb
 
     require 'wedge/kernel'
@@ -68,7 +70,7 @@
 
 </div>
 
-<img src="assets/corner.jpg" style="position: absolute; left:0; top:0;" />
+<img src="assets/corner.jpg" style="position: absolute; left:0; top:5px; height: 200px;" />
 
 <div id="nav">
   <a href="docs/api">API</a>  &middot;
