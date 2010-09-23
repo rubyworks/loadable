@@ -1,4 +1,4 @@
-= Load Wedge
+= Wedge README
 
 * +home+: http://github.com/proutils/wedge
 * +code+: http://github.com/proutils/wedge
