@@ -10,6 +10,9 @@ created: 2010-07-21
 description:
   Wedge makes it easy to write custom loaders.
 
+requires:
+  - syckle (build)
+
 resources:
   home: http://rubyworks.github.com/wedge
   repo: git://github.com/rubyworks/wedge.git
