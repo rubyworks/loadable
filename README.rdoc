@@ -73,9 +73,6 @@ return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
 falls back to the original #load and #require calls.
 
-
-== Provided Wedges
-
 Wedge provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
 
 === Ruby Wedge
@@ -110,14 +107,46 @@ With this we can be sure that 'facets/string/margin' was loaded from the facets
 library regardless of whether some other gem put a 'facets/string/margin' file
 in their lib/ directory.
 
-To complement Wedge and it's built-in Gem Wedge, you can install the +gem-wedge+
-gem.
+To use the Gem wedge, add it to your RUBYOPT environment variable, e.g.
 
-  $ gem install gem-wedge
+  RUBYOPT="-rwedge/gem"
 
-This turn the Gem Wedge into a gem plug-in, so it will be automatically loaded
-whenever RubyGems is loaded. See the the +gem-wedge+ README[http://github.com/rubyworks/gem-wedge]
-file for more information about the Gem Wedge and why it is so useful.
+The Gem wedge will load `rubygems.rb` automatically so you don't need to
+have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
+
+==== Why
+
+One of the rarely mention edge cases with the way in which RubyGems loads
+library files, and in fact the way Ruby's load system works in general, is
+that the "lib space" is a free for all. Any library can drop any file into
+their package's lib/ directory and potentially clobber a file of the same name
+in some one else's library. Now, a good <i>gem citizen</i> knows to put their 
+scripts in a directory with the same name as their gem package, nonetheless you
+might be surprised to see how often this simple but important practice is
+violated.[1] Consequently the order in which such gems are searched becomes of
+paramount importance --something that worked just fine on one machine can
+suddenly stop working on another for no obvious reason.
+
+It is also worth noting that the recent crop of gem isolation systems, such as
+Bundler and Isolate, while serving to reduce the likelihood of possible name
+clashes still do not fully remedy the issue. They merely reduce the number to
+gems that could cause the problem for any given dependent application.
+
+[1] See the INFRACTIONS.rdoc file for examples.
+
+==== How
+
+The Gem Wedge solves the issue entirely by allowing you to load files directly
+for a single gem and only that gem. It does so by adding a new valid syntax
+to Ruby's #load and #require methods. As an example, let's say we wanted to
+load the troff.rb script from the unroller library.
+
+  require 'unroller:troff'
+
+The colon is used to separate the gem name from the rest of the pathname.
+With this we can be 100% certain that the troff.rb file was required
+from the unroller gem and not a 'troff.rb' file from any other
+gem that might have created a script by the same name.
 
 
 == INSTALL
