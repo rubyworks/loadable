@@ -1,6 +1,8 @@
 = Wedge
 
 Author:: Thomas Sawyer
+License:: Apache 2.0
+Copyright:: (c) 2001 Thomas Sawyer
 
 
 == DESCRIPTION

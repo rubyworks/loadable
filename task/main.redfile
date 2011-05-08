@@ -1,7 +1,6 @@
 ---
-box:
-  service: Box
-  types  : [gem]
+gem:
+  service: Gem
   active : true
 
 dnote:
@@ -22,7 +21,7 @@ stats:
 
 rdoc:
   service : rdoc
-  template: newfish
+  format  : newfish
   output  : site/docs/api
   exclude : [Syckfile, PACKAGE, PROFILE]
 
