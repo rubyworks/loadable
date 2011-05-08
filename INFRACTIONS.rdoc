@@ -1,10 +1,60 @@
-= LIB SPACE INFRACTIONS
+= INFRACTIONS
+
+One of the rarely mentioned edge cases with the way in which RubyGems loads
+library files, and in fact the way Ruby's load system works in general, is
+that the _lib space_ is a free for all. Any library can drop any file into
+their package's loadpath (i.e. the lib/ directory) and potentially clobber
+a file of the same name in some one else's library.
+
+Here's an example irb session that demonstrate the issue. Here I already added
+a `matrix.rb` file, the did nothing but <code>puts "HERE!"</code>, to the +cuts+
+gem and installed it.
+
+   require 'rubygems'
+   => true 
+   gem "cuts"
+   => true 
+   require 'matrix'
+   HERE!
+   => true 
+
+Now, a good <i>gem citizen</i> knows to put their scripts in a directory with
+the same name as their gem package, nonetheless you might be surprised to see
+how often this simple but important practice is violated.
+Consequently the order in which such gems are searched becomes of
+paramount importance --something that worked just fine on one machine can
+suddenly stop working on another for no obvious reason.
+
+
+== ISOLATIONISTS
+
+It is also worth noting that the recent crop of gem isolation systems, such as
+Bundler and Isolate, while serving to reduce the likelihood of possible name
+clashes still do not fully remedy the issue. They merely reduce the number to
+gems that could cause the problem for any given dependent application.
+
+
+== SOLUTION
+
+The Ruby and Gem wedges solves the issue entirely by allowing us to load files
+from a single gem and only that gem. It does so by adding a new valid syntax
+to Ruby's #load and #require methods. As an example, let's say we wanted to
+load the troff.rb script from the unroller library.
+
+  require 'unroller:troff'
+
+The colon is used to separate the gem name from the rest of the pathname.
+With this we can be 100% certain that the troff.rb file was required
+from the unroller gem and not a 'troff.rb' file from any other
+gem that might have created a script by the same name.
+
+
+== EXTENT OF THE ISSUE
 
 You might be suprised to find out how many libraries violate the best practice
 of putting all thier scripts in a subdirectory by the same name as the package.
 Just on my development system alone, which really has but a small number of
 gems installed, there are quite a few cases.
-
 
 ParseTree-2.2.0/lib/:
 

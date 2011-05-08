@@ -1,23 +1,35 @@
-= Wedge README
+= Wedge
 
-* +home+: http://github.com/proutils/wedge
-* +code+: http://github.com/proutils/wedge
-* +talk+: http://groups.google.com/group/rubyworks-mailinglist
+Author:: Thomas Sawyer
 
 
 == DESCRIPTION
 
-The wedge gem provides an easy to use interface for adding custom
+The Wedge gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system (the #load and #require methods).
 
+In addition, Wedge includes two pre-assembled wedges that prevent 
+load interfence between gems (see WEDGES.rdoc).
 
-== SYNOPSIS
 
-Wedge was written initially to provide the single capability of loading
-Ruby standard libraries without potential interference from installed
-gems. The code naturally evolved into something more generic, useful for
-writing any kind of add-on load manager. The code for the Ruby wedge serves
-as a good example of writing a wedge.
+== RESOURCES
+
+* home: http://github.com/rubyworks/wedge
+* code: http://github.com/rubyworks/wedge
+* mail: http://groups.google.com/group/rubyworks-mailinglist
+
+
+== USAGE
+
+=== Building Wedges
+
+Wedge was written initially to provide the specific capability of loading
+Ruby standard libraries without potential interference from libraries
+installed via RubyGems (see WEDGES.rdoc). The code ultimately evolved
+into a more generic tool, useful for writing any kind of plug-in load
+manager. 
+
+The code for the Ruby wedge serves as a good example of writing a wedge.
 
   require 'wedge/kernel'
   require 'rbconfig'
@@ -73,29 +85,28 @@ return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
 falls back to the original #load and #require calls.
 
+=== Available Wedges
+
 Wedge provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
 
-=== Ruby Wedge
-
-The Ruby wedge is considered standard fare. When you require 'wedge' it will
-load the wedge kernel and also the Ruby wedge.
+==== Ruby Wedge
 
 The Ruby wedge makes it possible to load a Ruby standard library without
-interference from installed gems or other package systems.
+interference from installed gems or other package systems. It does this by 
+adding a new valid syntax to Ruby's #load and #require methods.
 
-  require 'wedge'
+  require 'wedge/ruby'
 
   require 'ruby:ostruct'
 
 This will load the ostruct.rb script from the Ruby standard library regardless
-of whether some newbie dropped an ostruct.rb file in their projects lib/ 
-directory without understand the consequences.
+of whether a someone else dropped an `ostruct.rb` file in their projects lib/ 
+directory without understanding the potential consequences.
 
-
-=== Gem Wedge
+==== Gem Wedge
 
 The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
-of a gem's files from other gems.
+of a gem's files from other gems.  
 
   require 'wedge/gem'
 
@@ -114,51 +125,18 @@ To use the Gem wedge, add it to your RUBYOPT environment variable, e.g.
 The Gem wedge will load `rubygems.rb` automatically so you don't need to
 have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
 
-==== Why
-
-One of the rarely mention edge cases with the way in which RubyGems loads
-library files, and in fact the way Ruby's load system works in general, is
-that the "lib space" is a free for all. Any library can drop any file into
-their package's lib/ directory and potentially clobber a file of the same name
-in some one else's library. Now, a good <i>gem citizen</i> knows to put their 
-scripts in a directory with the same name as their gem package, nonetheless you
-might be surprised to see how often this simple but important practice is
-violated.[1] Consequently the order in which such gems are searched becomes of
-paramount importance --something that worked just fine on one machine can
-suddenly stop working on another for no obvious reason.
-
-It is also worth noting that the recent crop of gem isolation systems, such as
-Bundler and Isolate, while serving to reduce the likelihood of possible name
-clashes still do not fully remedy the issue. They merely reduce the number to
-gems that could cause the problem for any given dependent application.
-
-[1] See the INFRACTIONS.rdoc file for examples.
-
-==== How
-
-The Gem Wedge solves the issue entirely by allowing you to load files directly
-for a single gem and only that gem. It does so by adding a new valid syntax
-to Ruby's #load and #require methods. As an example, let's say we wanted to
-load the troff.rb script from the unroller library.
-
-  require 'unroller:troff'
-
-The colon is used to separate the gem name from the rest of the pathname.
-With this we can be 100% certain that the troff.rb file was required
-from the unroller gem and not a 'troff.rb' file from any other
-gem that might have created a script by the same name.
-
 
 == INSTALL
+
+Installing via RubyGems follows the usual pattern.
 
   $ gem install wedge
 
 
 == LEGAL
 
-Wedge, Copyright (c) 2010 Thomas Sawyer
+Copyright (c) 2010 Thomas Sawyer
 
 Wedge is distributed under the terms of the Apache 2.0 License.
 
-See LICENSE file for more details.
-
+See APACHE2.txt file for more details.
