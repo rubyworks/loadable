@@ -7,14 +7,13 @@ authors: Thomas Sawyer
 license: Apache 2.0
 created: 2010-07-21
 
-description:
-  Wedge makes it easy to write custom loaders.
-
 requires:
   - syckle (build)
 
 resources:
   home: http://rubyworks.github.com/wedge
+
+repositories:
   repo: git://github.com/rubyworks/wedge.git
 
 copyright: Copyright (c) 2010 Thomas Sawyer
