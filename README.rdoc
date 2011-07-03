@@ -17,9 +17,9 @@ load interfence between libraries.
 
 == RESOURCES
 
-* home: http://github.com/rubyworks/wedge
-* code: http://github.com/rubyworks/wedge
-* mail: http://groups.google.com/group/rubyworks-mailinglist
+* Home[http://github.com/rubyworks/wedge]
+* Code[http://github.com/rubyworks/wedge]
+* Mail[http://groups.google.com/group/rubyworks-mailinglist]
 
 
 == USAGE
