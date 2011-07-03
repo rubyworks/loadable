@@ -1,0 +1,6 @@
+--protected
+--private
+lib/
+-
+[A-Z]*.*
+log/[A-Z].*

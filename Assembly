@@ -1,39 +1,17 @@
 ---
 gem:
-  service: Gem
   active : true
 
 dnote:
-  service  : DNote
-  loadpath : ~
   labels   : ~
-  output   : ~
-  format   : ~
+  output   : log/DNOTE.rdoc
   active   : true
 
-stats:
-  service  : Stats
-  title    : ~
-  loadpath : ~
-  exclude  : ~
-  output   : ~
-  active   : true
+yard:
+  yardopts: true
+  output  : doc
 
-rdoc:
-  service : rdoc
-  format  : newfish
-  output  : site/docs/api
-  exclude : [Syckfile, PACKAGE, PROFILE]
-
-ridoc:
-  service: RIDoc
-  include: ~
-  exclude: ~
-  output : ri
-  active : true
-
-testrb:
-  service  : testrb
+minitest:
   tests    : ~
   exclude  : ~
   loadpath : ~
@@ -41,11 +19,7 @@ testrb:
   live     : false   
   active   : false
 
-grancher:
-  service: Grancher
-  active: true
-
-gemcutter:
+github:
   active: true
 
 email:
@@ -64,9 +38,7 @@ email:
 
 vclog:
   service  : VClog
-  format   : html   # xml, txt
-  layout   : rel    # gnu
-  typed    : false
-  output   : ~
+  output   : log/history.rdoc
+  type     : history
   active   : false
 

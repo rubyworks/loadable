@@ -1,4 +1,5 @@
-#!mast -x Syckfile -x PROFILE .ruby bin lib spec test [A-Z]*
+#!mast .yardopts .ruby bin lib spec test [A-Z]*.*
+.yardopts
 .ruby
 lib/wedge/gem.rb
 lib/wedge/kernel.rb
@@ -8,6 +9,7 @@ lib/wedge.rb
 test/fixture/abbrev.rb
 test/wedge.rb
 HISTORY.rdoc
-LICENSE
+BSD-2.txt
 README.rdoc
-VERSION
+COPYING.rdoc
+INFRACTIONS.rdoc

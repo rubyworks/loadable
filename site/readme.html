@@ -1,35 +1,57 @@
-<h1>WEDGE README</h1>
+<h1>Wedge</h1>
+<table>
+<tr><td valign="top">Author</td><td><p>
+Thomas Sawyer
+</p>
+</td></tr>
+<tr><td valign="top">License</td><td><p>
+Apache 2.0
+</p>
+</td></tr>
+<tr><td valign="top">Copyright</td><td><p>
+&#169; 2001 Thomas Sawyer
+</p>
+</td></tr>
+</table>
 <h2>DESCRIPTION</h2>
 <p>
-The wedge gem provides an easy to use interface for adding custom load
-managers to Ruby&#8217;s standard load system (the #load and #require
+The Wedge gem provides an easy to use interface for adding custom load
+managers to Ruby&#8217;s standard load system (the `load` and `require`
 methods).
+</p>
+<p>
+In addition, Wedge includes two pre-assembled wedges that prevent  load
+interfence between libraries.
 </p>
 <h2>RESOURCES</h2>
 <ul>
 <li><p>
-<tt>home</tt>: <a
-href="http://github.com/proutils/wedge">github.com/proutils/wedge</a>
+home: <a
+href="http://github.com/rubyworks/wedge">github.com/rubyworks/wedge</a>
 </p>
 </li>
 <li><p>
-<tt>code</tt>: <a
-href="http://github.com/proutils/wedge">github.com/proutils/wedge</a>
+code: <a
+href="http://github.com/rubyworks/wedge">github.com/rubyworks/wedge</a>
 </p>
 </li>
 <li><p>
-<tt>talk</tt>: <a
+mail: <a
 href="http://groups.google.com/group/rubyworks-mailinglist">groups.google.com/group/rubyworks-mailinglist</a>
 </p>
 </li>
 </ul>
-<h2>SYNOPSIS</h2>
+<h2>USAGE</h2>
+<h3>Building Wedges</h3>
 <p>
-Wedge was written initially to provide the single capability of loading
-Ruby standard libraries without potential interference from installed gems.
-The code naturally evolved into something more generic, useful for writing
-any kind of add-on load manager. The code for the Ruby wedge serves as a
-good example of writing a wedge.
+Wedge was written initially to provide the specific capability of loading
+Ruby standard libraries without potential interference from libraries
+installed via RubyGems (see INFRACTIONS.rdoc). The code ultimately evolved
+into a more generic tool, useful for writing any kind of plug-in load
+manager. 
+</p>
+<p>
+The code for the Ruby wedge serves as a good example of writing a wedge.
 </p>
 <pre>
   require 'wedge/kernel'
@@ -92,33 +114,30 @@ handled and the loop can also break. But if the return value is
 continue. If all wedges have been tried and all have returned <tt>nil</tt>
 then it falls back to the original #load and #require calls.
 </p>
-<h2>Provided Wedges</h2>
+<h3>Available Wedges</h3>
 <p>
 Wedge provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
 </p>
-<h3>Ruby Wedge</h3>
-<p>
-The Ruby wedge is considered standard fare. When you require
-&#8216;wedge&#8217; it will load the wedge kernel and also the Ruby wedge.
-</p>
+<h4>Ruby Wedge</h4>
 <p>
 The Ruby wedge makes it possible to load a Ruby standard library without
-interference from installed gems or other package systems.
+interference from installed gems or other package systems. It does this by 
+adding a new valid syntax to Ruby&#8217;s #load and #require methods.
 </p>
 <pre>
-  require 'wedge'
+  require 'wedge/ruby'
 
   require 'ruby:ostruct'
 </pre>
 <p>
 This will load the ostruct.rb script from the Ruby standard library
-regardless of whether some newbie dropped an ostruct.rb file in their
-projects lib/  directory without understand the consequences.
+regardless of whether a someone else dropped an `ostruct.rb` file in their
+projects lib/  directory without understanding the potential consequences.
 </p>
-<h3>Gem Wedge</h3>
+<h4>Gem Wedge</h4>
 <p>
 The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
-of a gem&#8217;s files from other gems.
+of a gem&#8217;s files from other gems.  
 </p>
 <pre>
   require 'wedge/gem'
@@ -133,29 +152,29 @@ from the facets library regardless of whether some other gem put a
 &#8216;facets/string/margin&#8217; file in their lib/ directory.
 </p>
 <p>
-To complement Wedge and it&#8217;s built-in Gem Wedge, you can install the
-<tt>gem-wedge</tt> gem.
+To use the Gem wedge, add it to your RUBYOPT environment variable, e.g.
 </p>
 <pre>
-  $ gem install gem-wedge
+  RUBYOPT=&quot;-rwedge/gem&quot;
 </pre>
 <p>
-This turn the Gem Wedge into a gem plug-in, so it will be automatically
-loaded whenever RubyGems is loaded. See the the <tt>gem-wedge</tt> <a
-href="http://github.com/rubyworks/gem-wedge">README</a> file for more
-information about the Gem Wedge and why it is so useful.
+The Gem wedge will load `rubygems.rb` automatically so you don&#8217;t need
+to have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
 </p>
 <h2>INSTALL</h2>
+<p>
+Installing via RubyGems follows the usual pattern.
+</p>
 <pre>
   $ gem install wedge
 </pre>
 <h2>LEGAL</h2>
 <p>
-Wedge, Copyright &#169; 2010 Thomas Sawyer
+Copyright &#169; 2010 Thomas Sawyer
 </p>
 <p>
-Wedge is distributed under the terms of the Apache 2.0 License.
+Wedge is distributed under the terms of the BSD 2-Cluase License.
 </p>
 <p>
-See LICENSE file for more details.
+See BSD-2.txt file for details.
 </p>

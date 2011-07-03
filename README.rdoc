@@ -140,6 +140,7 @@ Installing via RubyGems follows the usual pattern.
 
 Copyright (c) 2010 Thomas Sawyer
 
-Wedge is distributed under the terms of the Apache 2.0 License.
+Wedge is distributed under the terms of the BSD 2-Cluase License.
 
-See APACHE2.txt file for more details.
+See BSD-2.txt file for details.
+
