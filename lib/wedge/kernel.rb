@@ -69,7 +69,7 @@ class Wedge
     # If a match is found the full path to the file is returned,
     # otherwise +nil+.
     def find(loadpath, relname, options={})
-      if options[:load] or SUFFIXES.include?(File.extname(relname))
+      if options[:load] or suffixes.include?(File.extname(relname))
         abspath = File.join(loadpath, relname)
         File.exist?(abspath) ? abspath : nil
       else
