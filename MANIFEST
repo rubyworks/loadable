@@ -6,8 +6,9 @@ lib/wedge/kernel.rb
 lib/wedge/ruby.rb
 lib/wedge/version.rb
 lib/wedge.rb
-test/fixture/abbrev.rb
-test/wedge.rb
+spec/fixture/abbrev.rb
+spec/helper.rb
+spec/ruby_wedge_spec.rb
 HISTORY.rdoc
 BSD-2.txt
 README.rdoc
