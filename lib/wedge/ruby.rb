@@ -1,4 +1,4 @@
-require 'wedge/kernel'
+require 'wedge'
 require 'rbconfig'
 
 Wedge.new :Ruby do

@@ -4,8 +4,9 @@
 #
 # The example would load the tracepoint file from the tracepoint gem.
 
-require 'wedge'
-require 'wedge/ruby' # temporary
+# Load wedge via wedge/ruby. The Ruby wedge provides
+# a way to treat ruby standard libs as if they were a gem.
+require 'wedge/ruby'
 
 Wedge.new :Gem do
 
