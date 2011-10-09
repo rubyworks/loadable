@@ -1,6 +1,5 @@
 require 'helper'
-
-require 'wedge/ruby'
+require 'load/ruby'
 
 describe "Ruby Wedge" do
 
@@ -20,8 +19,8 @@ describe "Ruby Wedge" do
     assert $NO_RUBY_WEDGE, "Local `abbrev.rb' library not loaded."
   end
 
-  it "should load a standard ruby library with the ruby prefix" do
-    require 'ruby:abbrev'
+  it "should load a standard ruby library with the from ruby option" do
+    require 'abbrev', :from=>'ruby'
     assert Abbrev, "Ruby `abbrev.rb' library not loaded."
   end
 
