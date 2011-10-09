@@ -1,16 +1,19 @@
 #!mast .yardopts .ruby bin lib spec test [A-Z]*.*
 .yardopts
 .ruby
-lib/wedge/gem.rb
-lib/wedge/kernel.rb
-lib/wedge/ruby.rb
-lib/wedge/version.rb
-lib/wedge.rb
+lib/load/gem/specification.rb
+lib/load/gem.rb
+lib/load/locate.rb
+lib/load/ruby.rb
+lib/load/vendor.rb
+lib/load/version.rb
+lib/load/wedge.rb
+lib/load.rb
+lib/load.yml
 spec/fixture/abbrev.rb
 spec/helper.rb
 spec/ruby_wedge_spec.rb
 HISTORY.rdoc
-BSD-2.txt
 README.rdoc
 COPYING.rdoc
 INFRACTIONS.rdoc
