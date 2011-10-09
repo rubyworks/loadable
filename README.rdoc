@@ -1,8 +1,10 @@
-= Load Manager
+= Load
 
 {Website}[http://github.com/rubyworks/load] |
 {Development}[http://github.com/rubyworks/load] |
 {Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
+
+----
 
 Author:: Thomas Sawyer
 License:: Apache 2.0
@@ -16,7 +18,7 @@ load managers to Ruby's standard load system, namely the `load`
 and `require` methods.
 
 In addition, Load includes two pre-assembled load wedges that prevent 
-load interfence between ruby and gems packages libraries.
+load interference between ruby and gems packages libraries.
 
 
 == USAGE
@@ -68,7 +70,7 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
 
   Load::Wedge.register(Load::RubyWedge.new)
 
-The `Load::Wedge` base class is hust a conveience class. One could write a load
+The `Load::Wedge` base class is just a convenience class. One could write a load
 wedge without it. The interface is very simple. Any object the responds to #call
 taking parameters of <code>(fname, options={})</code> can be used as a load
 wedge. Simply register it via:
@@ -137,7 +139,7 @@ have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
 
 Copyright (c) 2010 Thomas Sawyer
 
-Load is distributed under the terms of the BSD 2-Cluase License.
+Load is distributed under the terms of the BSD 2-Clause License.
 
 See COPYING.rdoc file for details.
 
