@@ -1,7 +1,7 @@
-= Wedge
+= Load Manager
 
-{Website}[http://github.com/rubyworks/wedge] |
-{Development}[http://github.com/rubyworks/wedge] |
+{Website}[http://github.com/rubyworks/load] |
+{Development}[http://github.com/rubyworks/load] |
 {Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
 
 Author:: Thomas Sawyer
@@ -12,14 +12,22 @@ Copyright:: (c) 2001 Thomas Sawyer
 == DESCRIPTION
 
 The Load gem provides an easy to use interface for adding custom
-load managers to Ruby's standard load system (the `load` and `require`
-methods).
+load managers to Ruby's standard load system, namely the `load` 
+and `require` methods.
 
 In addition, Load includes two pre-assembled load wedges that prevent 
-load interfence between libraries.
+load interfence between ruby and gems packages libraries.
 
 
 == USAGE
+
+=== Installation
+
+Installing via RubyGems follows the usual pattern. The gem is simply
+called `load`.
+
+  $ gem install load
+
 
 === Building Load Wedges
 
@@ -31,10 +39,10 @@ manager.
 
 The code for the Ruby wedge serves as a good example of writing a wedge.
 
-  require 'wedge/kernel'
+  require 'load/wedge'
   require 'rbconfig'
 
-  Load::Wedge.new :Ruby do
+  class Load::RubyWedge < Load::Wedge
 
     # Notice that rubylibdir takes precedence.
     LOCATIONS = ::RbConfig::CONFIG.values_at(
@@ -58,18 +66,17 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
 
   end
 
-Load::Wedge.new is actually just a helper method. One could write a load wedge without
-it as the interface is very simple. Any object the responds to #call taking
-parameters of <code>(fname, options={})</code> can be used as a load wedge. 
-Simply register it via:
+  Load::Wedge.register(Load::RubyWedge.new)
 
-  Wedge.register(mywedge)
+The `Load::Wedge` base class is hust a conveience class. One could write a load
+wedge without it. The interface is very simple. Any object the responds to #call
+taking parameters of <code>(fname, options={})</code> can be used as a load
+wedge. Simply register it via:
 
-Wedge.new makes it a bit easier by automatically creating an object extended by
-the Wedge::Helper module, which provides a few methods that can be generally
-useful to any load manager, and then registers the object as a load wedge
-automatically. As the example above shows, it also allows one to name their
-wedge, which can be useful for debugging load issues.
+  Load::Wedge.register(mywedge)
+
+There is also a Load::Wedge::Helper mixin that can be used as well, which
+provides a few methods that can be generally useful to any load manager,
 
 You might wonder how the single method, #call, handles both #load and #require
 operations. The secret is in the +options+ hash. If <code>options[:load]</code>
@@ -97,7 +104,7 @@ adding a new valid syntax to Ruby's #load and #require methods.
 
   require 'wedge/ruby'
 
-  require 'ruby:ostruct'
+  require 'ostruct', :from=>'ruby'
 
 This will load the ostruct.rb script from the Ruby standard library regardless
 of whether a someone else dropped an `ostruct.rb` file in their projects lib/ 
@@ -112,7 +119,7 @@ of a gem's files from other gems.
 
   gem 'facets', '~>2.8'
 
-  require 'facets:string/margin'
+  require 'string/margin', :from=>'facets'
 
 With this we can be sure that 'facets/string/margin' was loaded from the facets
 library regardless of whether some other gem put a 'facets/string/margin' file
@@ -120,24 +127,17 @@ in their lib/ directory.
 
 To use the Gem wedge, add it to your RUBYOPT environment variable, e.g.
 
-  RUBYOPT="-rwedge/gem"
+  RUBYOPT="-rload/gem"
 
 The Gem wedge will load `rubygems.rb` automatically so you don't need to
 have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
 
 
-== INSTALL
-
-Installing via RubyGems follows the usual pattern.
-
-  $ gem install load
-
-
-== LEGAL
+== COPYING
 
 Copyright (c) 2010 Thomas Sawyer
 
-Wedge is distributed under the terms of the BSD 2-Cluase License.
+Load is distributed under the terms of the BSD 2-Cluase License.
 
-See BSD-2.txt file for details.
+See COPYING.rdoc file for details.
 

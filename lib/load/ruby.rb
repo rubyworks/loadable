@@ -9,7 +9,7 @@ require 'rbconfig'
 # The example would load optparse standard library regardless of Gem installed
 # that might have a sciipt by the same name.
 
-Load::Wedge.new :Ruby do
+class Load::RubyWedge < Load::Wedge
 
   # Notice that rubylibdir takes precendence.
   LOCATIONS = ::RbConfig::CONFIG.values_at(
@@ -33,6 +33,7 @@ Load::Wedge.new :Ruby do
 
 end
 
+Load::Wedge.register(Load::RubyWedge.new)
 
 =begin log
 - 2011-10-09 trans:

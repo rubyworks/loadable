@@ -9,7 +9,7 @@ require 'load/ruby'
 #
 # The example would load the tracepoint file from the tracepoint gem.
 
-Load::Wedge.new :Gem do
+class Load::GemWedge < Load::Wedge
 
   # TODO: If :gem AND :from options are given, perhaps try both
   # instead either-or?
@@ -40,6 +40,7 @@ Load::Wedge.new :Gem do
 
 end
 
+Load::Wedge.register(Load::GemWedge.new)
 
 =begin log
 2011-10-09 trans:

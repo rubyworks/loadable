@@ -130,14 +130,18 @@ module Load
     #
     include Helper
 
-    # Create a new Load Wedge and automatically register it.
-    # The +name+ argument is used to identify the Wedge when
-    # an error occurs. The block is evaluated in the object's 
-    # singleton class.
-    def initialize(name, &block)
-      @name = name
-      (class << self; self; end).class_eval(&block)
-      Wedge.register(self)
+    ## Create a new Load Wedge and automatically register it.
+    ## The +name+ argument is used to identify the Wedge when
+    ## an error occurs. The block is evaluated in the object's 
+    ## singleton class.
+    #def initialize(name, &block)
+    #  @name = name
+    #  (class << self; self; end).class_eval(&block)
+    #  Wedge.register(self)
+    #end
+
+    def name
+      self.class.name
     end
 
   end
