@@ -1,5 +1,9 @@
 = Wedge
 
+{Website}[http://github.com/rubyworks/wedge] |
+{Development}[http://github.com/rubyworks/wedge] |
+{Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
+
 Author:: Thomas Sawyer
 License:: Apache 2.0
 Copyright:: (c) 2001 Thomas Sawyer
@@ -7,26 +11,19 @@ Copyright:: (c) 2001 Thomas Sawyer
 
 == DESCRIPTION
 
-The Wedge gem provides an easy to use interface for adding custom
+The Load gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system (the `load` and `require`
 methods).
 
-In addition, Wedge includes two pre-assembled wedges that prevent 
+In addition, Load includes two pre-assembled load wedges that prevent 
 load interfence between libraries.
-
-
-== RESOURCES
-
-* Home[http://github.com/rubyworks/wedge]
-* Code[http://github.com/rubyworks/wedge]
-* Mail[http://groups.google.com/group/rubyworks-mailinglist]
 
 
 == USAGE
 
-=== Building Wedges
+=== Building Load Wedges
 
-Wedge was written initially to provide the specific capability of loading
+Load::Wedge was written initially to provide the specific capability of loading
 Ruby standard libraries without potential interference from libraries
 installed via RubyGems (see INFRACTIONS.rdoc). The code ultimately evolved
 into a more generic tool, useful for writing any kind of plug-in load
@@ -37,7 +34,7 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
   require 'wedge/kernel'
   require 'rbconfig'
 
-  Wedge.new :Ruby do
+  Load::Wedge.new :Ruby do
 
     # Notice that rubylibdir takes precedence.
     LOCATIONS = ::RbConfig::CONFIG.values_at(
@@ -61,7 +58,7 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
 
   end
 
-Wedge.new is actually just a helper method. One could write a load wedge without
+Load::Wedge.new is actually just a helper method. One could write a load wedge without
 it as the interface is very simple. Any object the responds to #call taking
 parameters of <code>(fname, options={})</code> can be used as a load wedge. 
 Simply register it via:
@@ -90,7 +87,7 @@ falls back to the original #load and #require calls.
 
 === Available Wedges
 
-Wedge provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
+Load provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
 
 ==== Ruby Wedge
 
@@ -133,7 +130,7 @@ have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
 
 Installing via RubyGems follows the usual pattern.
 
-  $ gem install wedge
+  $ gem install load
 
 
 == LEGAL
