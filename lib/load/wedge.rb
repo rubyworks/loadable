@@ -1,3 +1,8 @@
+module Kernel
+  alias_method :require_without_wedge, :require
+  alias_method :load_without_wedge, :load
+end
+
 module Load
 
   # Load Wedges are used to safely inject new import logic into Ruby's
@@ -140,12 +145,9 @@ module Load
 end
 
 module Kernel
-  alias_method :require_without_wedge, :require
-  alias_method :load_without_wedge, :load
-
   #
   def require(fname, options={})
-    success = Wedge.require(fname, options)
+    success = Load::Wedge.require(fname, options)
     if success.nil?
       success = require_without_wedge(fname)
     end
@@ -154,7 +156,7 @@ module Kernel
 
   #
   def load(fname, options={})
-    success = Wedge.load(fname, options)
+    success = Load::Wedge.load(fname, options)
     if success.nil?
       success = load_without_wedge(fname)
     end

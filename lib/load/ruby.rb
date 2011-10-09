@@ -19,10 +19,8 @@ Load::Wedge.new :Ruby do
   # TODO: Maybe add support more refined selection of locations.
 
   #
-  def call(fname, options={})
+  def call(file, options={})
     return unless options[:from].to_s == 'ruby'
-
-    file = md.post_match
 
     LOCATIONS.each do |loadpath|
       if path = find(loadpath, file, options)
@@ -37,7 +35,7 @@ end
 
 
 =begin log
-2011-10-09 trans:
+- 2011-10-09 trans:
   - Namespace changed from Wedge to Load::Wedge.
   - Deprecated use of colon notation (e.g. require 'ruby:optparse')
     in favor of 'from' option (e.g. require 'optparse', :from=>'ruby').
