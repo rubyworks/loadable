@@ -1,8 +1,8 @@
-require 'load/gem/specification' if defined?(::Gem)
+require 'rubygems/specification/current_specs' if defined?(::Gem)
 
 # TODO: Convert this into an aspect of load wedges.
 
-module Load
+module RbConfig
 
   # Find library files (e.g. plugins), searching through standard $LOAD_PATH,
   # as well as RubyGems and Roller packages if they are being used.

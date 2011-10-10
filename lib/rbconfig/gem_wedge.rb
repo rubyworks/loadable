@@ -1,7 +1,7 @@
 # Use the Ruby wedge too so standard libs can be treated in the
 # same manner.
 
-require 'load_system/wedges/ruby'
+require 'rbconfig/ruby_wedge'
 
 # The Gem Wedge allows gem files to be loaded in a isolated fashion.
 #
@@ -9,7 +9,7 @@ require 'load_system/wedges/ruby'
 #
 # The example would load the tracepoint file from the tracepoint gem.
 
-class Load::GemWedge < Load::Wedge
+class RbConfig::GemWedge < RbConfig::LoadWedge
 
   # TODO: If :gem AND :from options are given, perhaps try both
   # instead of either-or?
@@ -40,6 +40,6 @@ class Load::GemWedge < Load::Wedge
 
 end
 
-LoadSystem << LoadSystem::GemWedge.new
+$LOAD_WEDGE << RbConfig::GemWedge.new
 
 # Copyright 2010 Thomas Sawyer, Rubyworks (BSD-2-Clause license)

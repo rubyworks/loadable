@@ -1,4 +1,4 @@
-module Load
+module RbConfig
 
   # Add vendered projects to load path. For example:
   #

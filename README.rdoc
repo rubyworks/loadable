@@ -1,18 +1,19 @@
-= Load System
+= Loader
 
-{Website}[http://github.com/rubyworks/load] |
-{Development}[http://github.com/rubyworks/load] |
+{Website}[http://github.com/rubyworks/loader] |
+{Development}[http://github.com/rubyworks/loader] |
 {Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
 
 
 == DESCRIPTION
 
-The Load System gem provides an easy to use interface for adding custom
+The Loader gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system, namely the `load` 
 and `require` methods.
 
-In addition, Load includes two pre-assembled load wedges that prevent 
-load interference between ruby and gems packages libraries.
+In addition, it includes two pre-assembled load wedges that prevent 
+load interference between ruby's standard library and gem packages
+(see INFRACTIONS.rdoc).
 
 
 == USAGE
@@ -22,7 +23,7 @@ load interference between ruby and gems packages libraries.
 Installing via RubyGems follows the usual pattern. The gem is called
 `load_wedge`.
 
-  $ gem install load_wedge
+  $ gem install load_system
 
 
 === Creating Load Wedges
@@ -35,10 +36,10 @@ manager.
 
 The code for the Ruby wedge serves as a good example of writing a wedge.
 
-  require 'load/wedge'
   require 'rbconfig'
+  require 'rbconfig/loader'
 
-  class Load::RubyWedge < Load::Wedge
+  class RbConfig::RubyLoader < RbConfig::Loader
 
     # Notice that rubylibdir takes precedence.
     LOCATIONS = ::RbConfig::CONFIG.values_at(
@@ -62,17 +63,17 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
 
   end
 
-  Load::Wedge.register(Load::RubyWedge.new)
+  $LOAD_WEDGE << Load::RubyWedge.new
 
-The `Load::Wedge` base class is just a convenience class. One could write a load
-wedge without it. The interface is very simple. Any object the responds to #call
-taking parameters of <code>(fname, options={})</code> can be used as a load
-wedge. Simply register it via:
+The `Loader` base class is just a convenience class. Load wedges can be easily
+written wihtout it. The interface is quite simple. Any object the responds
+to #call, taking parameters of <code>(fname, options={})</code>, can be used as
+a load wedge. Simply activate if by adding it to the $LOAD_WEDGE global variable.
 
-  Load::Wedge.register(mywedge)
+  $LOAD_WEDGE << mywedge
 
-There is also a Load::Wedge::Helper mixin that can be used as well, which
-provides a few methods that can be generally useful to any load manager,
+There is also a `RbConfig::LoadWedge::Helper` mixin which provides a few methods
+that can be generally useful to any load wedge.
 
 You might wonder how the single method, #call, handles both #load and #require
 operations. The secret is in the +options+ hash. If <code>options[:load]</code>
@@ -88,9 +89,10 @@ return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
 falls back to the original #load and #require calls.
 
-=== Prefab Wedges
+=== Prefabricated Wedges
 
-Load provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
+The Loader gem provides two load wedges out-of-the-box, the Ruby wedge and the
+Gem wedge.
 
 ==== Ruby Wedge
 
@@ -98,7 +100,7 @@ The Ruby wedge makes it possible to load a Ruby standard library without
 interference from installed gems or other package systems. It does this by 
 adding a new valid syntax to Ruby's #load and #require methods.
 
-  require 'wedge/ruby'
+  require 'rbconfig/ruby_wedge'
 
   require 'ostruct', :from=>'ruby'
 
@@ -111,22 +113,24 @@ directory without understanding the potential consequences.
 The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
 of a gem's files from other gems.  
 
-  require 'wedge/gem'
+  require 'rbconfig/gem_wedge'
 
   gem 'facets', '~>2.8'
 
   require 'string/margin', :from=>'facets'
 
 With this we can be sure that 'facets/string/margin' was loaded from the facets
-library regardless of whether some other gem put a 'facets/string/margin' file
-in their lib/ directory.
+library regardless of whether some other gem has a 'facets/string/margin' file
+in its lib/ directory.
 
-To use the Gem wedge, add it to your RUBYOPT environment variable, e.g.
+=== Autoloading
 
-  RUBYOPT="-rload/gem"
+To load both the Gem and Ruby wedges, and the entire wedge system,
+add `load_system` to your RUBYOPT environment variable, e.g.
 
-The Gem wedge will load `rubygems.rb` automatically so you don't need to
-have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
+  $ export RUBYOPT="-rload_wedge"
+
+Place this in your shell's configuration file, such as `~/.bashrc`.
 
 
 == COPYING

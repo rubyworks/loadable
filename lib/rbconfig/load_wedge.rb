@@ -3,29 +3,16 @@ module Kernel
   alias_method :load_without_wedge, :load
 end
 
-module LoadSystem
-
-  def self.<<(wedge)
-    Wedge.register(wedge)
-  end
+module RbConfig
 
   # Load Wedges are used to safely inject new import logic into Ruby's
   # require/load system.
   #
-  class Wedge
+  # Active load wedges are stored in `$LOAD_WEDGE` global variable.
+  class LoadWedge
 
-    # Stores registered wedges.
-    REGISTRY = []
-
-    # Class method access to REGISTRY constant.
-    def self.registry
-      REGISTRY
-    end
-
-    # Register a wedge, adding it to REGISTRY.
-    def self.register(wedge)
-      registry << wedge unless registry.include?(wedge)
-    end
+    # Stores active load wedges.
+    $LOAD_WEDGE = []
 
     # Require script.
     #
@@ -35,7 +22,7 @@ module LoadSystem
     def self.require(fname, options={})
       options[:load] = false
       success = nil
-      registry.each do |wedge| 
+      $LOAD_WEDGE.each do |wedge| 
         success = wedge.call(fname, options)
         next if success.nil?
       end
@@ -51,7 +38,7 @@ module LoadSystem
       options = Hash===options ? options : {:wrap=>options}
       options[:load] = true
       success = nil
-      registry.each do |wedge| 
+      $LOAD_WEDGE.each do |wedge| 
         success = wedge.call(fname, options)
         next if success.nil?
       end
@@ -84,12 +71,12 @@ module LoadSystem
       SUFFIXES = ['.rb', '.rbw', '.so', '.bundle', '.dll', '.sl', '.jar'] #, '']
 
       alias_method :require, :require_without_wedge
-      alias_method :load, :load_without_wedge
+      alias_method :load,    :load_without_wedge
 
       # Good idea?
-      def self.extended(base)
-        Wedge.register base
-      end
+      #def self.extended(base)
+      #  LoadWedge.register base
+      #end
 
       #
       def call(fname, options={})
@@ -155,7 +142,7 @@ end
 module Kernel
   #
   def require(fname, options={})
-    success = LoadSystem::Wedge.require(fname, options)
+    success = RbConfig::LoadWedge.require(fname, options)
     if success.nil?
       success = require_without_wedge(fname)
     end
@@ -164,7 +151,7 @@ module Kernel
 
   #
   def load(fname, options={})
-    success = LoadSystem::Wedge.load(fname, options)
+    success = RbConfig::LoadWedge.load(fname, options)
     if success.nil?
       success = load_without_wedge(fname)
     end
