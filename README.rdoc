@@ -1,4 +1,4 @@
-= Loader
+= Load Wedge
 
 {Website}[http://github.com/rubyworks/loader] |
 {Development}[http://github.com/rubyworks/loader] |
@@ -37,9 +37,9 @@ manager.
 The code for the Ruby wedge serves as a good example of writing a wedge.
 
   require 'rbconfig'
-  require 'rbconfig/loader'
+  require 'rbconfig/load_wedge'
 
-  class RbConfig::RubyLoader < RbConfig::Loader
+  class RbConfig::RubyWedge < RbConfig::LoadWedge
 
     # Notice that rubylibdir takes precedence.
     LOCATIONS = ::RbConfig::CONFIG.values_at(
@@ -48,12 +48,10 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
 
     #
     def call(fname, options={})
-      return unless md = /^ruby[:\/]/.match(fname)
-
-      file = md.post_match
+      return unless options[:from].to_s == 'ruby'
 
       LOCATIONS.each do |loadpath|
-        if path = find(loadpath, file, options)
+        if path = find(loadpath, fname, options)
           return super(path, options)
         end
       end
@@ -65,26 +63,27 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
 
   $LOAD_WEDGE << Load::RubyWedge.new
 
-The `Loader` base class is just a convenience class. Load wedges can be easily
+The `LoadWedge` base class is just a convenience class. Load wedges can be easily
 written wihtout it. The interface is quite simple. Any object the responds
 to #call, taking parameters of <code>(fname, options={})</code>, can be used as
 a load wedge. Simply activate if by adding it to the $LOAD_WEDGE global variable.
 
   $LOAD_WEDGE << mywedge
 
-There is also a `RbConfig::LoadWedge::Helper` mixin which provides a few methods
-that can be generally useful to any load wedge.
+There is also a `RbConfig::LoadWedge::Helper` mixin which provides the crux of
+the LoadWedge classes features, namely a few methods that might be useful to
+any load wedge. An example if the `find` method used in the example, which
+will will search an array of load paths in accordance with the Ruby's built-in
+require and load lookup procedures.
 
-You might wonder how the single method, #call, handles both #load and #require
+You might wonder how the single method, `#call`, handles both load and require
 operations. The secret is in the +options+ hash. If <code>options[:load]</code>
 resolves to true, then it is a +load+ operation, otherwise it is a +require+
-operation.
-
-As wedges are registered, they are added to a list in order of registration.
-When #load or #require is called each wedge is tried in turn. The return value
-of #call controls how this loop proceeds. If the return value is +true+ then the
-load was successful, and the loop can break. If it is +false+ it means the
-loading has already been handled and the loop can also break. But if the
+operation. The $LOAD_WEDGE global varaible is iterated over in order.
+When `#load` or `#require` is called each wedge is tried in turn. The return
+value of `#call` controls how this loop proceeds. If the return value is +true+
+then the load was successful, and the loop can break. If it is +false+ it means
+the loading has already been handled and the loop can also break. But if the
 return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
 falls back to the original #load and #require calls.
