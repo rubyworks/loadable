@@ -1,6 +1,6 @@
 = COPYRIGHT NOTICES
 
-== Load
+== Load System
 
 Copyright:: (c) 2010 Rubyworks, Thomas Sawyer
 License:: BSD-2-Clause

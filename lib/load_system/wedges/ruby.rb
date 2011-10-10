@@ -1,4 +1,4 @@
-require 'load/wedge'
+require 'load_system/wedge'
 require 'rbconfig'
 
 # The Ruby Wedge allows standaard libray scripts to be loaded in a isolated
@@ -9,7 +9,7 @@ require 'rbconfig'
 # The example would load optparse standard library regardless of Gem installed
 # that might have a sciipt by the same name.
 
-class Load::RubyWedge < Load::Wedge
+class LoadSystem::RubyWedge < LoadSystem::Wedge
 
   # Notice that rubylibdir takes precendence.
   LOCATIONS = ::RbConfig::CONFIG.values_at(
@@ -33,13 +33,6 @@ class Load::RubyWedge < Load::Wedge
 
 end
 
-Load::Wedge.register(Load::RubyWedge.new)
-
-=begin log
-- 2011-10-09 trans:
-  - Namespace changed from Wedge to Load::Wedge.
-  - Deprecated use of colon notation (e.g. require 'ruby:optparse')
-    in favor of 'from' option (e.g. require 'optparse', :from=>'ruby').
-=end
+LoadSystem << LoadSystem::RubyWedge.new
 
 # Copyright 2010 Thomas Sawyer, Rubyworks (BSD-2-Clause license)

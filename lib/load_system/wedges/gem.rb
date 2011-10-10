@@ -1,7 +1,7 @@
 # Use the Ruby wedge too so standard libs can be treated in the
 # same manner.
 
-require 'load/ruby'
+require 'load_system/wedges/ruby'
 
 # The Gem Wedge allows gem files to be loaded in a isolated fashion.
 #
@@ -12,7 +12,7 @@ require 'load/ruby'
 class Load::GemWedge < Load::Wedge
 
   # TODO: If :gem AND :from options are given, perhaps try both
-  # instead either-or?
+  # instead of either-or?
 
   #
   def call(fname, options={})
@@ -40,13 +40,6 @@ class Load::GemWedge < Load::Wedge
 
 end
 
-Load::Wedge.register(Load::GemWedge.new)
-
-=begin log
-2011-10-09 trans:
-  - Namespace changed from Wedge to Load::Wedge.
-  - Deprecated use of colon notation (e.g. require 'ruby:optparse')
-    in favor of :gem/:from options (e.g. require 'functor', :from=>'facets').
-=end
+LoadSystem << LoadSystem::GemWedge.new
 
 # Copyright 2010 Thomas Sawyer, Rubyworks (BSD-2-Clause license)

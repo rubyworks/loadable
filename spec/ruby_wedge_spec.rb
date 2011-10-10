@@ -1,5 +1,5 @@
 require 'helper'
-require 'load/ruby'
+require 'load_system/wedges/ruby'
 
 describe "Ruby Wedge" do
 

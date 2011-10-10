@@ -3,7 +3,11 @@ module Kernel
   alias_method :load_without_wedge, :load
 end
 
-module Load
+module LoadSystem
+
+  def self.<<(wedge)
+    Wedge.register(wedge)
+  end
 
   # Load Wedges are used to safely inject new import logic into Ruby's
   # require/load system.
@@ -20,7 +24,7 @@ module Load
 
     # Register a wedge, adding it to REGISTRY.
     def self.register(wedge)
-      registry << wedge
+      registry << wedge unless registry.include?(wedge)
     end
 
     # Require script.
@@ -151,7 +155,7 @@ end
 module Kernel
   #
   def require(fname, options={})
-    success = Load::Wedge.require(fname, options)
+    success = LoadSystem::Wedge.require(fname, options)
     if success.nil?
       success = require_without_wedge(fname)
     end
@@ -160,7 +164,7 @@ module Kernel
 
   #
   def load(fname, options={})
-    success = Load::Wedge.load(fname, options)
+    success = LoadSystem::Wedge.load(fname, options)
     if success.nil?
       success = load_without_wedge(fname)
     end

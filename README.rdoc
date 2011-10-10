@@ -1,19 +1,17 @@
-= Load
+= Load Wedge
 
 {Website}[http://github.com/rubyworks/load] |
 {Development}[http://github.com/rubyworks/load] |
 {Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
-
 ----
-
 Author:: Thomas Sawyer
-License:: Apache 2.0
-Copyright:: (c) 2001 Thomas Sawyer
+License:: BSD-2-Clause
+Copyright:: (c) 2010 Thomas Sawyer
 
 
 == DESCRIPTION
 
-The Load gem provides an easy to use interface for adding custom
+The Load Wedge gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system, namely the `load` 
 and `require` methods.
 
@@ -25,15 +23,15 @@ load interference between ruby and gems packages libraries.
 
 === Installation
 
-Installing via RubyGems follows the usual pattern. The gem is simply
-called `load`.
+Installing via RubyGems follows the usual pattern. The gem is called
+`load_wedge`.
 
-  $ gem install load
+  $ gem install load_wedge
 
 
-=== Building Load Wedges
+=== Creating Load Wedges
 
-Load::Wedge was written initially to provide the specific capability of loading
+Load Wedge was written initially to provide the specific capability of loading
 Ruby standard libraries without potential interference from libraries
 installed via RubyGems (see INFRACTIONS.rdoc). The code ultimately evolved
 into a more generic tool, useful for writing any kind of plug-in load
@@ -94,7 +92,7 @@ return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
 falls back to the original #load and #require calls.
 
-=== Available Wedges
+=== Prefab Wedges
 
 Load provides two wedges out-of-the-box, the Ruby wedge and the Gem wedge.
 
@@ -137,7 +135,7 @@ have both `-rubygems` and `-rwedge/gem` in the same RUBYOPT.
 
 == COPYING
 
-Copyright (c) 2010 Thomas Sawyer
+Copyright (c) 2010 Thomas Sawyer, Rubyworks
 
 Load is distributed under the terms of the BSD 2-Clause License.
 
