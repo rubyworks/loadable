@@ -1,11 +1,16 @@
 = Loadable
 
-{Website}[http://github.com/rubyworks/loadable] |
-{Development}[http://github.com/rubyworks/loadable] |
-{Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
+== Overview
+
+Website:: http://github.com/rubyworks/loadable
+Development:: http://github.com/rubyworks/loadable
+Mailing-List:: http://groups.google.com/group/rubyworks-mailinglist
+Author:: Thomas Sawyer
+License:: BSD-2-Clause
+Copyright:: (c) 2010 Thomas Sawyer
 
 
-== DESCRIPTION
+== Description
 
 The Loadable gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system, namely the `load` 
@@ -16,7 +21,7 @@ load interference between ruby's standard library and gem packages
 (see INFRACTIONS.rdoc).
 
 
-== USAGE
+== Usage
 
 === Installation
 
@@ -153,16 +158,11 @@ add `load_system` to your RUBYOPT environment variable, e.g.
 Place this in your shell's configuration file, such as `~/.bashrc`.
 
 
-== COPYING
+== Copyrights
 
 Copyright (c) 2010 Thomas Sawyer, Rubyworks
 
-Load is distributed under the terms of the BSD 2-Clause License.
+Load is distributed under the terms of the **FreeBSD** license.
 
 See COPYING.rdoc file for details.
-
------
-Author:: Thomas Sawyer
-License:: BSD-2-Clause
-Copyright:: (c) 2010 Thomas Sawyer
 
