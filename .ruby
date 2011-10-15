@@ -21,6 +21,10 @@ requirements:
   groups:
   - test
   development: true
+- name: rake
+  groups:
+  - build
+  development: true
 dependencies: []
 repositories:
 - uri: git://github.com/rubyworks/loadable.git
