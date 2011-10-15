@@ -1,6 +1,6 @@
 = Loadable
 
-== Overview
+== 1 Overview
 
 Website:: http://github.com/rubyworks/loadable
 Development:: http://github.com/rubyworks/loadable
@@ -10,7 +10,7 @@ License:: BSD-2-Clause
 Copyright:: (c) 2010 Thomas Sawyer
 
 
-== Description
+== 2 Description
 
 The Loadable gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system, namely the `load` 
@@ -21,9 +21,9 @@ load interference between ruby's standard library and gem packages
 (see INFRACTIONS.rdoc), and a load wedge for development vendoring.
 
 
-== Usage
+== 3 Usage
 
-=== Installation
+=== 3.1 Installation
 
 Installing via RubyGems follows the usual pattern. The gem is called
 `load_wedge`.
@@ -31,7 +31,7 @@ Installing via RubyGems follows the usual pattern. The gem is called
   $ gem install loadable
 
 
-=== Creating Loaders
+=== 3.2 Creating Loaders
 
 Loadable was written initially to provide the specific capability of loading
 Ruby standard libraries without potential interference from libraries
@@ -102,13 +102,13 @@ continue. If all wedges have been tried and all have returned +nil+ then it
 falls back to the original #load and #require calls, via an instance
 OriginalLoader which should always be the last loader in the $LOADERS list.
 
-=== Prefabricated Wedges
+=== 3.3 Prefabricated Wedges
 
 The Loadable gem provides three special loaders out-of-the-box, the RubyLoader,
 the GemLoader and the VendorLoader. The first two are probably not what you
 might think they are going just by their names, so keep reading...
 
-==== RubyLoader
+==== 3.3.1 RubyLoader
 
 The Ruby wedge makes it possible to load a Ruby standard library without
 interference from installed gems or other package systems. It does this by 
@@ -120,7 +120,7 @@ This will load the `ostruct.rb` script from the Ruby standard library regardless
 of whether a someone else dropped an `ostruct.rb` file in their project's `lib/`
 directory without understanding the potential consequences.
 
-==== GemLoader
+==== 3.3.2 GemLoader
 
 The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
 of a gem's files from other gems.
@@ -142,14 +142,14 @@ The Gem wedge also supports version constraints, so you do not need use
 
   require 'string/margin', :from=>'facets', :version=>'~>2.8'
 
-=== VendorLoader
+=== 3.3.3 VendorLoader
 
 The Vendor wedge is used to add special vendored projects to the load system.
 This is especially useful for development. Vendored projects can be added
 in two ways, by registering an instance of VendorLoader, per the above examples,
 or using the dedicated `Loadable.vendor(*dir)` method.
 
-=== Autoloading
+== 3.4 Autoloading
 
 To load both the Gem and Ruby wedges, and the entire wedge system,
 add `loadable` to your RUBYOPT environment variable, e.g.
@@ -159,7 +159,7 @@ add `loadable` to your RUBYOPT environment variable, e.g.
 Place this in your shell's configuration file, such as `~/.bashrc`.
 
 
-== Copyrights
+== 4 Copyrights
 
 Copyright (c) 2010 Thomas Sawyer, Rubyworks
 
