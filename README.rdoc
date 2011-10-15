@@ -16,9 +16,9 @@ The Loadable gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system, namely the `load` 
 and `require` methods.
 
-In addition, it includes three pre-assembled load wedges that prevent 
+In addition, it includes two pre-assembled load wedges that prevent 
 load interference between ruby's standard library and gem packages
-(see INFRACTIONS.rdoc).
+(see INFRACTIONS.rdoc), and a load wedge for development vendoring.
 
 
 == Usage
@@ -31,9 +31,9 @@ Installing via RubyGems follows the usual pattern. The gem is called
   $ gem install loadable
 
 
-=== Creating Load Wedges
+=== Creating Loaders
 
-Load Wedge was written initially to provide the specific capability of loading
+Loadable was written initially to provide the specific capability of loading
 Ruby standard libraries without potential interference from libraries
 installed via RubyGems (see INFRACTIONS.rdoc). The code ultimately evolved
 into a more generic tool, useful for writing any kind of plug-in load
@@ -74,7 +74,7 @@ domain.
 
   Loadable.register(Loadable::RubyLoader.new)
 
-Under the hood, this simply appends the instance of the $LOADERS global variable.
+Under the hood, this simply appends the instance to the $LOADERS global variable.
 
 Loaders, also called load wedges, are easy to write as their interface is very
 simple. Any object the responds to #call, taking parameters of 
@@ -83,11 +83,11 @@ should also support `#each(options={}, &block)` which is used to iterate over
 all requirable files a loader supports.
 
 The `Loadable` mixin is just a convenience module that makes writing loaders
-a bit easier. Load wedges can be written without it.
-It provides a few methods that might be useful to any load wedge. An example is
-the `lookup` method used in the example, which will will search an array of
-load paths in accordance with the Ruby's built-in require and load lookup
-procedures.
+a bit easier. Load wedges can be written without it, however the mixin
+provides a few methods that are often useful to any load wedge. An example is
+the `lookup` method used in the above example, which will will search an
+a load path in accordance with the Ruby's built-in require and load lookup
+procedures, i.e. trying defualt extensions like `.rb`.
 
 You might wonder how the single method, `#call`, handles both load and require
 operations. The secret is in the +options+ hash. If <code>options[:load]</code>
@@ -112,7 +112,7 @@ might think they are going just by their names, so keep reading...
 
 The Ruby wedge makes it possible to load a Ruby standard library without
 interference from installed gems or other package systems. It does this by 
-checking for a `:from` option passed tot he require or load methods.
+checking for a `:from` option passed to the require or load methods.
 
   require 'ostruct', :from=>'ruby'
 
@@ -133,9 +133,9 @@ With this we can be sure that 'facets/string/margin' was loaded from the facets
 library regardless of whether some other gem has a 'facets/string/margin' file
 in its `lib/` directory. If no gem has this file, it will fallback to the 
 remaining loaders. However, if we use the `:gem` options instead, it will 
-raise a load error instead.
+raise a load error.
 
-  require 'string/margin', :gem=>'facets'
+  require 'string/does_not_exit', :gem=>'facets'
 
 The Gem wedge also supports version constraints, so you do not need use 
 `gem()` method.
