@@ -34,5 +34,16 @@ describe "GemLoader" do
     assert ANSI, "Ruby `ansi.rb' library not loaded."
   end
 
+  # This isn't a 100% thurough.
+  it "should iterate over current gems files" do
+    loader = Loadable::GemLoader.new
+
+    list = []
+    loader.each(:gem=>'ansi'){ |f| list << f }
+
+    assert list.include?('ansi.rb')
+    assert list.include?('ansi/code.rb')
+  end
+
 end
 
