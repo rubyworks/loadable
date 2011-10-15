@@ -60,7 +60,7 @@ module Loadable
     # Iterate over each loadable file in specified gem.
     #
     def each(options={}, &block)
-      return unless apply?(fname, options)
+      return unless apply?(nil, options)
 
       gem_name = (options[:gem] || options[:from]).to_s
 
@@ -73,8 +73,10 @@ module Loadable
       return unless spec
 
       #spec.activate
-     
-      spec.lib_files.each(&block)
+
+      spec.require_paths.each do |path|
+        traverse(File.join(spec.full_gem_path, path), &block)
+      end
     end
 
     # Determine if this load4 wedge is applicable given the +fname+
