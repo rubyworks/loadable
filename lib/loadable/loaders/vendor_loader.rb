@@ -1,3 +1,5 @@
+# TODO: Support `:from` option.
+
 require 'loadable/mixin'
 
 module Loadable
@@ -19,6 +21,8 @@ module Loadable
     def initialize(*directory)
       raise ArgumentError if directory.empty?
 
+      @_yaml_loaded ||= !(require 'yaml').nil?
+
       settings  = (Hash === directory.last ? directory.pop : {})
       directory = File.expand_path(File.join(*directory))
 
@@ -28,6 +32,7 @@ module Loadable
         @load_path.concat(Dir.glob(directory))
       else
         Dir.glob(directory).each do |dir|
+          next unless File.directory?(dir)
           build_loadpath(dir)
         end
       end
@@ -41,9 +46,8 @@ module Loadable
     #
     def call(fname, options={})
       @load_path.each do |path|
-        if file = lookup(path, fname, options)
-          return super(file, options)
-        end
+        file = lookup(path, fname, options)
+        return super(file, options) if file
       end
       raise_load_error(fname)
     end
@@ -64,7 +68,7 @@ module Loadable
     # looks for a `lib` directory.
     #
     def build_loadpath(dir)
-      if dotruby_file = Dir.glob(File.join(dir, '.ruby'))
+      if dotruby_file = Dir.glob(File.join(dir, '.ruby')).first
         @load_path.concat(loadpath_dotruby(dotruby_file, dir))
 
       elsif defined?(::Gem) && gemspec = Dir.glob(File.join(dir, '{*,}.gemspec')).first
