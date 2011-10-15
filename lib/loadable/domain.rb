@@ -12,9 +12,9 @@ module Loadable
     success = nil
     $LOADERS.each do |wedge| 
       success = wedge.call(fname, options)
-      next if success.nil?
+      break unless success.nil?
     end
-    success
+    return success
   end
 
   # Iterate over all requirable files.
