@@ -1,8 +1,9 @@
-module RbConfig
 
-  # Add vendered projects to load path. For example:
+class VendorLoader < Loader
+
+  # Add vendored projects to load path. For example:
   #
-  #   Load.vendor(project_root_directoy, 'vendor')
+  #   $LOAD_PATH.vendor(project_root_directoy, 'vendor')
   #
   # Then any projects in the vendor directory will be accessible
   # via require and load. This method looks for a .gemspec or .ruby
