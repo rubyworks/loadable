@@ -1,0 +1,52 @@
+reap(1) -- rules-based automated build tool
+===========================================
+
+## SYNOPSIS
+
+`reap`
+`reap` <task> [<arg>...]<br>
+`reap` `-T`|`--tasks`<br>
+`reap` `-h`|`--help`<br>
+
+
+## DESCRIPTION
+
+**Reap** is a state-based rules-engine powered build tool.
+The developer only ever needs to run a single command `reap`,
+and the project built process kicks off and all details
+of project management are handled
+
+Of course sometimes a developer only wants to preform a narrow
+and singular task. Reap has a task system built-in as well that
+largely emulates the Rake build tool.
+
+
+## OPTIONS
+
+These options act as subcommands:
+
+  * `-T`, `--tasks`:
+    Display the runnable tasks defined in the project's reap files.
+
+  * `-h`, `--help`:
+    Display this help message.
+
+
+## ISSUES
+
+**Reap** depends on **Ronn** to provide this man-page and command help message.
+Ronn depends on hpricot and rdiscount, extension libraries that are non-trivial
+to install on some systems. A more portable version of this program would be
+welcome.
+
+
+## COPYRIGHT
+
+Reap is Copyright (c) 2009 Thomas Sawyer, Rubyworks
+
+Reap is distributed in accordance to the **GPL-3** license.
+
+
+## SEE ALSO
+
+rake(1), ronn(1)

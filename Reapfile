@@ -1,4 +1,10 @@
-desc "Run tests"
-task 'test' do
+desc "Run unit tests"
+task :test do
   system "ruby -Ilib -Ispec spec/*.rb | tapout pretty"
 end
+
+desc "Generate man pages"
+task :ronn do
+  system "ronn man/*.ronn"
+end
+
