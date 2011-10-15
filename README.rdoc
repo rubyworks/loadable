@@ -1,17 +1,17 @@
-= Load Wedge
+= Loadable
 
-{Website}[http://github.com/rubyworks/loader] |
-{Development}[http://github.com/rubyworks/loader] |
+{Website}[http://github.com/rubyworks/loadable] |
+{Development}[http://github.com/rubyworks/loadable] |
 {Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
 
 
 == DESCRIPTION
 
-The Loader gem provides an easy to use interface for adding custom
+The Loadable gem provides an easy to use interface for adding custom
 load managers to Ruby's standard load system, namely the `load` 
 and `require` methods.
 
-In addition, it includes two pre-assembled load wedges that prevent 
+In addition, it includes three pre-assembled load wedges that prevent 
 load interference between ruby's standard library and gem packages
 (see INFRACTIONS.rdoc).
 
@@ -23,7 +23,7 @@ load interference between ruby's standard library and gem packages
 Installing via RubyGems follows the usual pattern. The gem is called
 `load_wedge`.
 
-  $ gem install load_system
+  $ gem install loadable
 
 
 === Creating Load Wedges
@@ -37,9 +37,11 @@ manager.
 The code for the Ruby wedge serves as a good example of writing a wedge.
 
   require 'rbconfig'
-  require 'rbconfig/load_wedge'
+  require 'loadable/mixin'
 
-  class RbConfig::RubyWedge < RbConfig::LoadWedge
+  class Loadable::RubyLoader
+
+    include Loadable
 
     # Notice that rubylibdir takes precedence.
     LOCATIONS = ::RbConfig::CONFIG.values_at(
@@ -51,68 +53,71 @@ The code for the Ruby wedge serves as a good example of writing a wedge.
       return unless options[:from].to_s == 'ruby'
 
       LOCATIONS.each do |loadpath|
-        if path = find(loadpath, fname, options)
+        if path = lookup(loadpath, fname, options)
           return super(path, options)
         end
       end
 
-      raise LoadError, "no such file to load -- #{fname}"
+      raise_load_error(fname)
     end
 
   end
 
-  $LOAD_WEDGE << Load::RubyWedge.new
+To put this loader into action we simply need to register it with the Loadable 
+domain.
 
-The `LoadWedge` base class is just a convenience class. Load wedges can be easily
-written wihtout it. The interface is quite simple. Any object the responds
-to #call, taking parameters of <code>(fname, options={})</code>, can be used as
-a load wedge. Simply activate if by adding it to the $LOAD_WEDGE global variable.
+  Loadable.register(Loadable::RubyLoader.new)
 
-  $LOAD_WEDGE << mywedge
+Under the hood, this simply appends the instance of the $LOADERS globabl variable.
 
-There is also a `RbConfig::LoadWedge::Helper` mixin which provides the crux of
-the LoadWedge classes features, namely a few methods that might be useful to
-any load wedge. An example if the `find` method used in the example, which
-will will search an array of load paths in accordance with the Ruby's built-in
-require and load lookup procedures.
+Loaders, also called load wedges, are easy to write as their interface is very
+simple. Any object the responds to #call, taking parameters of 
+<code>(fname, options={})</code>, can be used as a load wedge. A load wedge
+should also support `#each(options={}, &block)` which is used to iterate over
+all requirable files a loader supports.
+
+The `Loadable` mixin is just a convenience module that makes writting loaders
+a bit easier. Load wedges can be written without it.
+It provides a few methods that might be useful to any load wedge. An example is
+the `lookup` method used in the example, which will will search an array of
+load paths in accordance with the Ruby's built-in require and load lookup
+procedures.
 
 You might wonder how the single method, `#call`, handles both load and require
 operations. The secret is in the +options+ hash. If <code>options[:load]</code>
 resolves to true, then it is a +load+ operation, otherwise it is a +require+
-operation. The $LOAD_WEDGE global varaible is iterated over in order.
+operation. The $LOADERS global varaible is iterated over in order.
 When `#load` or `#require` is called each wedge is tried in turn. The return
 value of `#call` controls how this loop proceeds. If the return value is +true+
 then the load was successful, and the loop can break. If it is +false+ it means
 the loading has already been handled and the loop can also break. But if the
 return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
-falls back to the original #load and #require calls.
+falls back to the original #load and #require calls, via an instance
+OriginalLoader which should alwasy be the last loader in the $LOADERS list.
 
 === Prefabricated Wedges
 
-The Loader gem provides two load wedges out-of-the-box, the Ruby wedge and the
-Gem wedge.
+The Loadable gem provides three special loaders out-of-the-box, the RubyLoader,
+the GemLoader and the VendorLoader. The first two are probably not what you
+might think they are going just by their names, so keep reading...
 
-==== Ruby Wedge
+==== RubyLoader
 
 The Ruby wedge makes it possible to load a Ruby standard library without
 interference from installed gems or other package systems. It does this by 
-adding a new valid syntax to Ruby's #load and #require methods.
-
-  require 'rbconfig/ruby_wedge'
+checking for a `:from` option passed tot he require or load methods.
 
   require 'ostruct', :from=>'ruby'
 
-This will load the ostruct.rb script from the Ruby standard library regardless
-of whether a someone else dropped an `ostruct.rb` file in their projects lib/ 
+This will load the `ostruct.rb` script from the Ruby standard library regardless
+of whether a someone else dropped an `ostruct.rb` file in their project's `lib/`
 directory without understanding the potential consequences.
 
-==== Gem Wedge
+==== GemLoader
 
 The Gem wedge is similar to the Ruby wedge, in that it isolates the loading
-of a gem's files from other gems.  
-
-  require 'rbconfig/gem_wedge'
+of a gem's files from other gems.
 
   gem 'facets', '~>2.8'
 
@@ -120,14 +125,30 @@ of a gem's files from other gems.
 
 With this we can be sure that 'facets/string/margin' was loaded from the facets
 library regardless of whether some other gem has a 'facets/string/margin' file
-in its lib/ directory.
+in its `lib/` directory. If no gem has this file, it will fallback to the 
+remaining loaders. However, if we use the `:gem` options instead, it will 
+raise a load error instead.
+
+  require 'string/margin', :gem=>'facets'
+
+The Gem wedge also supports version constratins, so you do not need use 
+`gem()` method.
+
+  require 'string/margin', :from=>'facets', :version=>'~>2.8'
+
+=== VendorLoader
+
+The Vendor wedge is used to add special vendored projects to the load system.
+This is especailly useful for development. Vendored projects can be added
+in two ways, by regisitering an instance of VendorLoader, per the above examples,
+or using the dedicated `Loadable.vendor(*dir)` method.
 
 === Autoloading
 
 To load both the Gem and Ruby wedges, and the entire wedge system,
 add `load_system` to your RUBYOPT environment variable, e.g.
 
-  $ export RUBYOPT="-rload_wedge"
+  $ export RUBYOPT="-rloadable"
 
 Place this in your shell's configuration file, such as `~/.bashrc`.
 
