@@ -49,6 +49,7 @@ module Loadable
       end
 
       file = spec.find_requirable_file(fname)
+      file = spec.find_requirable_file(File.join(gem_name, fname)) unless file
 
       if file
         super(file, options)
