@@ -55,4 +55,10 @@ module Loadable
     $LOADERS.unshift(VendorLoader.new(*directory))
   end
 
+  # Add a loader to the $LOADERS global variable.
+  #
+  def self.register(loader)
+    $LOADERS.unshift(loader)
+  end
+
 end

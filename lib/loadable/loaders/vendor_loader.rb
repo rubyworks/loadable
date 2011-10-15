@@ -1,4 +1,4 @@
-require_relative '../mixin'
+require 'loadable/mixin'
 
 module Loadable
 

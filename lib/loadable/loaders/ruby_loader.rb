@@ -3,7 +3,7 @@
 # TODO: Add new vendor locations.
 
 require 'rbconfig'
-require_relative '../mixin'
+require 'loadable/mixin'
 
 module Loadable
 
@@ -24,15 +24,6 @@ module Loadable
       'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
     )
 
-    # The `#apply?` methods determines if the load wedge is applicable.
-    #
-    # Returns +true+ if this loader is not applicable, which is
-    # determined by the use of `:from => 'ruby'` option, otherwise `false`.
-    #
-    def apply?(fname, options={})
-      options[:from].to_s == 'ruby'
-    end
-
     # Load the the first standard Ruby library matching +file+.
     #
     # Returns +nil+ if this loader is not applicable, which is
@@ -47,7 +38,7 @@ module Loadable
         end
       end
 
-      raise_load_error(fname)
+      raise_load_error(file)
     end
 
     #
@@ -57,6 +48,16 @@ module Loadable
         traverse(path, &block)
       end
     end
+
+    # The `#apply?` methods determines if the load wedge is applicable.
+    #
+    # Returns +true+ if this loader is not applicable, which is
+    # determined by the use of `:from => 'ruby'` option, otherwise `false`.
+    #
+    def apply?(fname, options={})
+      options[:from].to_s == 'ruby'
+    end
+
 
   private
 

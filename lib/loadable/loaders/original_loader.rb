@@ -1,5 +1,5 @@
-require_relative '../mixin'
-require_relative '../core_ext/rubygems'
+require 'loadable/mixin'
+require 'loadable/core_ext/rubygems'
 
 module Loadable
 

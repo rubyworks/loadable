@@ -34,8 +34,24 @@ module Gem
       end
       return list
     end
+
+    # Return full path of requireable file path given relative path.
+    def find_requirable_file(file)
+      root = full_gem_path
+
+      require_paths.each do |lib|
+        base = "#{root}/#{lib}/#{file}"
+        Gem.suffixes.each do |suf|
+          path = "#{base}#{suf}"
+          return path if File.file? path
+        end
+      end
+
+      return nil
+    end
   end
 
+=begin
   class GemPathSearcher
     # Return a list of matching files among active or latest gems.
     def current_files(glob)
@@ -60,5 +76,6 @@ module Gem
       matches.values.flatten.uniq
     end
   end
+=end
 
 end

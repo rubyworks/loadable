@@ -3,7 +3,8 @@
 # TODO: If :gem AND :from options are given, perhaps try both
 # instead of either-or?
 
-require_relative '../mixin'
+require 'loadable/mixin'
+require 'loadable/core_ext/rubygems'
 
 module Loadable
 
@@ -25,16 +26,6 @@ module Loadable
 
     include Loadable
 
-    # Determine if this load wedge is applicable given the +fname+
-    # and +options+.
-    #
-    def apply?(fname, options={})
-      return true if options[:gem]
-      return true if options[:from] &&
-        Gem::Specification.all_names.include?(options[:from].to_s)
-      return false
-    end
-
     # Load script from specific gem.
     #
     # Returns +nil+ if this loader is not applicable, which is determined
@@ -43,7 +34,21 @@ module Loadable
     def call(fname, options={})
       return unless apply?(fname, options)
 
-      file = find(fname, options).first
+      gem_name = options[:gem] || options[:from]
+
+      if vers = options[:version]
+        spec = ::Gem::Specification.find_by_name(gem_name, vers)
+      else
+        spec = ::Gem::Specification.find_by_name(gem_name)
+      end
+
+      if options[:gem]
+        raise_load_error(fname) unless spec
+      else
+        return unless spec
+      end
+
+      file = spec.find_requirable_file(fname)
 
       if file
         super(file, options)
@@ -52,47 +57,35 @@ module Loadable
       end
     end
 
+    # Iterate over each loadable file in specified gem.
     #
     def each(options={}, &block)
       return unless apply?(fname, options)
 
       gem_name = (options[:gem] || options[:from]).to_s
 
-      return unless Gem::Specification.all_names.include?(gem_name)
-
       if vers = options[:version]
-        gem(gem_name, vers)
+        spec = ::Gem::Specification.find_by_name(gem_name, vers)
       else
-        gem(gem_name)
+        spec = ::Gem::Specification.find_by_name(gem_name)
       end
 
-      gem_spec = Gem.loaded_specs[gem_name]
-      
-      gem_spec.lib_files.each(&block)
+      return unless spec
+
+      #spec.activate
+     
+      spec.lib_files.each(&block)
     end
 
-  private
-
-    # Returns first matching script.
+    # Determine if this load4 wedge is applicable given the +fname+
+    # and +options+.
     #
-    # Returns +nil+ if this loader is not applicable, which is determined
-    # by the use of `:gem => 'foo'` or `:from` => 'foo'` options.
-    #
-    def find(gem_file, options={})
-      return unless apply?(fname, options)
-
-      gem_name = (options[:gem] || options[:from]).to_s
-
-      return unless Gem::Specification.all_names.include?(gem_name)
-
-      gem(gem_name)
-
-      gem_spec = Gem.loaded_specs[gem_name]
-
-      #if gem_spec
-        return Gem.searcher.matching_files(gem_spec, gem_file).first ||
-               Gem.searcher.matching_files(gem_spec, File.join(gem_name, gem_file)).first
-      #end
+    def apply?(fname, options={})
+      return true if options[:gem]
+      return true if options[:from] && (
+        ::Gem::Specification.find{ |s| options[:from].to_s == s.name }
+      )
+      return false
     end
 
   end

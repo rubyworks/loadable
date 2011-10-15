@@ -16,7 +16,7 @@ describe "Ruby Loader" do
 
   it "should load local library without the ruby prefix" do
     require 'abbrev'
-    assert $NO_RUBY_WEDGE, "Local `abbrev.rb' library not loaded."
+    assert $NO_ABBREV, "Local `abbrev.rb' library not loaded."
   end
 
   it "should load the standard ruby library with the `:from` ruby option" do
