@@ -7,3 +7,4 @@ Rake::TestTask.new do |t|
   t.options = '| tapout pretty'
 end
 
+task :default => [:test]
