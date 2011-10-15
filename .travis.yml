@@ -6,5 +6,8 @@ rvm:
   - rbx-2.0
   - jruby
   - ree
-script: "bundle exec ruby -Ilib -Ispec spec/*.rb"
+
+# TODO: Add this when Reap is finally released.
+#
+#   script: "bundle exec reap test"
 
