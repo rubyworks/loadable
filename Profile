@@ -16,8 +16,9 @@ authors:
   - Thomas Sawyer <transfire@gmail.com>
 
 requirements:
-  - detroit (build)
-  - minitap (test)
+  - detroit  (build)
+  - minitest (test)
+  - minitap  (test)
 
 repositories:
   upstream: git://github.com/rubyworks/loadable.git

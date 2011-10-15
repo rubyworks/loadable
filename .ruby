@@ -13,6 +13,10 @@ requirements:
   groups:
   - build
   development: true
+- name: minitest
+  groups:
+  - test
+  development: true
 - name: minitap
   groups:
   - test
@@ -21,23 +25,21 @@ dependencies: []
 repositories:
 - uri: git://github.com/rubyworks/loadable.git
   scm: git
-  name: public
+  name: upstream
 resources: {}
 load_path:
 - lib
-extra:
-  manifest: MANIFEST
+extra: {}
 source:
-- meta
+- Profile
 alternatives: []
 revision: 0
 created: '2010-07-21'
 summary: Safely Customize Ruby's Load System
 title: Loadable
 name: loadable
-version: 1.1.0
-description: ! "The Loader gem provides an easy to use interface for adding custom\nload
-  managers to Ruby's standard load system, namely the `load` \nand `require` methods.\n\nIn
-  addition, it includes two pre-assembled load wedges that prevent \nload interference
-  between ruby's standard library and gem packages\n(see INFRACTIONS.rdoc)."
+version: 1.2.0
+description: Loadable modifieds Ruby's load/require system to handle "load wedges",
+  which work much like routes in web frameworks, but in this case determine which
+  files get loaded.
 date: '2011-10-15'
