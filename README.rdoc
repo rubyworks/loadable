@@ -2,12 +2,13 @@
 
 == 1 Overview
 
-Website:: http://github.com/rubyworks/loadable
-Development:: http://github.com/rubyworks/loadable
-Mailing-List:: http://groups.google.com/group/rubyworks-mailinglist
+Project:: Loadable
 Author:: Thomas Sawyer
 License:: BSD-2-Clause
 Copyright:: (c) 2010 Thomas Sawyer
+Website:: http://github.com/rubyworks/loadable
+Development:: http://github.com/rubyworks/loadable
+Mailing-List:: http://groups.google.com/group/rubyworks-mailinglist
 
 
 == 2 Description
