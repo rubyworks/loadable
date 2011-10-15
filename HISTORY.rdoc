@@ -1,9 +1,24 @@
 = RELEASE HISTORY
 
+== 1.2.0 / 2011-10-15
+
+This release brings an almost complete rewrite of the API and
+a renaming of the project form 'wedge' to 'loadable'. See the
+API documentaiton for details.
+
+Changes:
+
+* Rewrite API almost entirely.
+* Rename project from 'wedge' to 'loadable'.
+* Utilize mixin rather than sublcass for loader classes.
+* OriginalLoader handles Ruby's default load mechanism.
+* New VendorLoader to support development.
+
+
 == 1.1.0 / 2011-07-03
 
 The Ruby wedge is no longer automatuically loaded when using
-`require "wedge"`. Load it manually with `require "wedge/ruby`".
+`require "wedge"`. Load it manually loaded with `require "wedge/ruby`".
 
 Changes:
 
