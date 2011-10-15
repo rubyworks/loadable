@@ -1,7 +1,7 @@
 require 'helper'
-require 'rbconfig/ruby_wedge'
+require 'loadable'
 
-describe "Ruby Wedge" do
+describe "Ruby Loader" do
 
   # setup alternate loadpath
   dir = File.expand_path(File.dirname(__FILE__) + '/fixture')
@@ -19,7 +19,7 @@ describe "Ruby Wedge" do
     assert $NO_RUBY_WEDGE, "Local `abbrev.rb' library not loaded."
   end
 
-  it "should load a standard ruby library with the from ruby option" do
+  it "should load the standard ruby library with the `:from` ruby option" do
     require 'abbrev', :from=>'ruby'
     assert Abbrev, "Ruby `abbrev.rb' library not loaded."
   end
