@@ -40,6 +40,7 @@ into a more generic tool, useful for writing any kind of plug-in load
 manager. 
 
 The code for the Ruby wedge serves as a good example of writing a wedge.
+(Note this is leaves out a few details of the real class for simplicity sake.)
 
   require 'rbconfig'
   require 'loadable/mixin'
@@ -73,7 +74,7 @@ domain.
 
   Loadable.register(Loadable::RubyLoader.new)
 
-Under the hood, this simply appends the instance of the $LOADERS globabl variable.
+Under the hood, this simply appends the instance of the $LOADERS global variable.
 
 Loaders, also called load wedges, are easy to write as their interface is very
 simple. Any object the responds to #call, taking parameters of 
@@ -81,7 +82,7 @@ simple. Any object the responds to #call, taking parameters of
 should also support `#each(options={}, &block)` which is used to iterate over
 all requirable files a loader supports.
 
-The `Loadable` mixin is just a convenience module that makes writting loaders
+The `Loadable` mixin is just a convenience module that makes writing loaders
 a bit easier. Load wedges can be written without it.
 It provides a few methods that might be useful to any load wedge. An example is
 the `lookup` method used in the example, which will will search an array of
@@ -91,7 +92,7 @@ procedures.
 You might wonder how the single method, `#call`, handles both load and require
 operations. The secret is in the +options+ hash. If <code>options[:load]</code>
 resolves to true, then it is a +load+ operation, otherwise it is a +require+
-operation. The $LOADERS global varaible is iterated over in order.
+operation. The $LOADERS global variable is iterated over in order.
 When `#load` or `#require` is called each wedge is tried in turn. The return
 value of `#call` controls how this loop proceeds. If the return value is +true+
 then the load was successful, and the loop can break. If it is +false+ it means
@@ -99,7 +100,7 @@ the loading has already been handled and the loop can also break. But if the
 return value is +nil+, it means the wedge does not apply and the loop should
 continue. If all wedges have been tried and all have returned +nil+ then it
 falls back to the original #load and #require calls, via an instance
-OriginalLoader which should alwasy be the last loader in the $LOADERS list.
+OriginalLoader which should always be the last loader in the $LOADERS list.
 
 === Prefabricated Wedges
 
@@ -136,7 +137,7 @@ raise a load error instead.
 
   require 'string/margin', :gem=>'facets'
 
-The Gem wedge also supports version constratins, so you do not need use 
+The Gem wedge also supports version constraints, so you do not need use 
 `gem()` method.
 
   require 'string/margin', :from=>'facets', :version=>'~>2.8'
@@ -144,14 +145,14 @@ The Gem wedge also supports version constratins, so you do not need use
 === VendorLoader
 
 The Vendor wedge is used to add special vendored projects to the load system.
-This is especailly useful for development. Vendored projects can be added
-in two ways, by regisitering an instance of VendorLoader, per the above examples,
+This is especially useful for development. Vendored projects can be added
+in two ways, by registering an instance of VendorLoader, per the above examples,
 or using the dedicated `Loadable.vendor(*dir)` method.
 
 === Autoloading
 
 To load both the Gem and Ruby wedges, and the entire wedge system,
-add `load_system` to your RUBYOPT environment variable, e.g.
+add `loadable` to your RUBYOPT environment variable, e.g.
 
   $ export RUBYOPT="-rloadable"
 
