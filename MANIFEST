@@ -23,6 +23,6 @@ spec/helper.rb
 spec/ruby_loader_spec.rb
 spec/vendor_loader_spec.rb
 HISTORY.rdoc
-README.rdoc
+README.md
 COPYING.rdoc
 INFRACTIONS.rdoc
