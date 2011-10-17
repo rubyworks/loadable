@@ -1,33 +1,39 @@
-<p>This is the source code for the built-in Ruby wedge.</p>
+<p>This is a simple example that makes any Ruby script in ones home 
+directory requirable.</p>
 
 <pre class="highlight">
-# wedge/ruby.rb
-
-require 'wedge/kernel'
-require 'rbconfig'
-
-Wedge.new :Ruby do
-
-  LOCATIONS = ::RbConfig::CONFIG.values_at(
-    'rubylibdir', 'archdir', 'sitelibdir', 'sitearchdir'
-  )
+class HomeLoader
+  include Loadable
 
   def call(fname, options={})
-    return unless md = /^ruby[:\/]/.match(fname)
+    return unless options[:home]
 
-    file = md.post_match
+    home = File.expand_path('~')
 
-    LOCATIONS.each do |loadpath|
-      if path = find(loadpath, file, options)
-        return super(path, options)
-      end
+    if path = find(home, file, options)
+      return super(path, options)
     end
 
     raise LoadError, "no such file to load -- #{fname}"
   end
 
+  def each(options={}, &block)
+    return unless options[:home]
+
+    home = File.expand_path('~')
+    exts = default_file_extensions.join(',')
+
+    Dir["#{home}/**/*{.#{exts}}"].each do |file|
+      block.call(path)
+    end  
+  end
 end
+
+Loadable.register(HomeLoader.new)
 </pre>
 
-<p></p>
+<p>One could of course just add one's home path to the $LOAD_PATH
+and get much the same effect. But notice that with the above 
+load wedge it only applies if the option `:home=>true` is provided
+to the require or load method.</p>
 
