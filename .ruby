@@ -30,7 +30,9 @@ repositories:
 - uri: git://github.com/rubyworks/loadable.git
   scm: git
   name: upstream
-resources: {}
+resources:
+  home: http://rubyworks.github.com/loadable
+  code: http://github.com/rubyworks/loadable
 load_path:
 - lib
 extra: {}
@@ -46,4 +48,4 @@ version: 1.2.0
 description: Loadable modifieds Ruby's load/require system to handle "load wedges",
   which work much like routes in web frameworks, but in this case determine which
   files get loaded.
-date: '2011-10-15'
+date: '2011-10-17'

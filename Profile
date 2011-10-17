@@ -21,6 +21,10 @@ requirements:
   - minitap  (test)
   - rake     (build)
 
+resources:
+  home: http://rubyworks.github.com/loadable
+  code: http://github.com/rubyworks/loadable
+
 repositories:
   upstream: git://github.com/rubyworks/loadable.git
 
