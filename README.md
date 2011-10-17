@@ -16,13 +16,13 @@
 
 The Loadable gem provides a more robust and convenient means of augmenting
 Ruby's load system, namely the `load` and `require` methods. Rather than
-alias and override these method, Loadble keeps a list of *load wedges*
+alias and override these methods, Loadable keeps a list of *load wedges*
 that control the routing of require and load calls.
 
 In addition, the Loadable gem includes two pre-made load wedges that can be
-used to prevent name clashing between Ruby's standard library and gem packages
+used to prevent name clashes between Ruby's standard library and gem packages
 (see INFRACTIONS.rdoc for more on this). There is also a load wedge for
-for developers to easily add vendored project to the load system.
+for developers to make it trivial to make vendored sub-projects loadable.
 
 
 ## 3 Usage
@@ -40,7 +40,7 @@ system, add `loadable` to your RUBYOPT environment variable.
 
 Place this in your shell's configuration file, such as `~/.bashrc`.
 
-If you do not want the default setup you can require `loadable/system' instead.
+If you do not want the default setup you can `require 'loadable/system'` instead.
 This will load in Loadable system, but only add an `OriginalLoader` to the
 `$LOADERS` list, leaving off the Ruby and Gem loaders.
 
