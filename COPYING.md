@@ -6,7 +6,7 @@
 |--------------|----------------------------------------------------------|
 | Copyright    | (c) 2010 Thomas Sawyer, Rubyworks                        |
 | License      | BSD-2-Clause                                             |
-| Wedsite      | http://rubyworks.github.com/wedge                        |
+| Wedsite      | http://rubyworks.github.com/loadable                     |
 
     Copyright 2010 Rubyworks, Thomas Sawyer. All rights reserved.
 
