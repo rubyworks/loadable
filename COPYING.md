@@ -1,10 +1,12 @@
-= COPYRIGHT NOTICES
+# COPYRIGHT NOTICES
 
-== Load System
+## Loadable
 
-Copyright:: (c) 2010 Rubyworks, Thomas Sawyer
-License:: BSD-2-Clause
-Wedsite:: http://rubyworks.github.com/wedge
+| Project      | Loadable                                                 |
+|--------------|----------------------------------------------------------|
+| Copyright    | (c) 2010 Thomas Sawyer, Rubyworks                        |
+| License      | BSD-2-Clause                                             |
+| Wedsite      | http://rubyworks.github.com/wedge                        |
 
     Copyright 2010 Rubyworks, Thomas Sawyer. All rights reserved.
 

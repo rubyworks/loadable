@@ -22,7 +22,7 @@ spec/gem_loader_spec.rb
 spec/helper.rb
 spec/ruby_loader_spec.rb
 spec/vendor_loader_spec.rb
-HISTORY.rdoc
+COPYING.md
+HISTORY.md
 README.md
-COPYING.rdoc
-INFRACTIONS.rdoc
+INFRACTIONS.md

@@ -1,6 +1,6 @@
-= RELEASE HISTORY
+# RELEASE HISTORY
 
-== 1.2.0 / 2011-10-15
+## 1.2.0 / 2011-10-15
 
 This release brings an almost complete rewrite of the API and
 a renaming of the project form 'wedge' to 'loadable'. See the
@@ -15,7 +15,7 @@ Changes:
 * New VendorLoader to support development.
 
 
-== 1.1.0 / 2011-07-03
+## 1.1.0 / 2011-07-03
 
 The Ruby wedge is no longer automatuically loaded when using
 `require "wedge"`. Load it manually loaded with `require "wedge/ruby`".
@@ -25,7 +25,7 @@ Changes:
 * Ruby wedge is not automatically loaded with wedge library.
 
 
-== 1.0.0 / 2010-09-03
+## 1.0.0 / 2010-09-03
 
 This release is simply a maintenance release, updating some project metadata.
 No functionality has been changed.
@@ -35,7 +35,7 @@ Changes:
 * Uupdate project metadata to latest POM.
 
 
-== 1.0.0 / 2010-08-01
+## 1.0.0 / 2010-08-01
 
 Initial release of Wedge, a tool for easily creating custom
 load managers.
