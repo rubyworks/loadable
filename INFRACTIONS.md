@@ -157,10 +157,6 @@ gems installed, there are quite a few cases.
       pr_eventmachine.rb
       rubyeventmachine.so
 
-    grosser-parallel-0.3.1/lib/:
-
-      parallel.rb
-
     hpricot-0.8.1/lib/:
 
       fast_xs.so
