@@ -3,6 +3,7 @@ gem:
   active : true
 
 dnote:
+  title    : Developer's Notes
   labels   : ~
   output   : log/DNOTE.rdoc
   active   : true
@@ -20,25 +21,15 @@ minitest:
   active   : false
 
 github:
-  active: true
+  gh_pages: web
 
 email:
-  service : Email
-  file    : ~
-  subject : ~
-  mailto  : ruby-talk@ruby-lang.org
-#  from    : transfire@gmail.com
-#  server  : <%= ENV['EMAIL_SERVER'] %>
-#  port    : <%= ENV['EMAIL_PORT'] %>
-#  account : <%= ENV['EMAIL_ACCOUNT'] %>
-#  domain  : <%= ENV['EMAIL_DOMAIN'] %>
-#  login   : <%= ENV['EMAIL_LOGIN'] %>
-#  secure  : <%= ENV['EMAIL_SECURE'] %>
-  active  : true
+  mailto:
+    - ruby-talk@ruby-lang.org
+    - rubyworks-mailinglist@googlegroups.com
 
 vclog:
-  service  : VClog
-  output   : log/history.rdoc
-  type     : history
-  active   : false
+  output:
+    - log/history.html
+    - log/changes.html
 
