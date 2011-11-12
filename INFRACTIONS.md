@@ -7,7 +7,7 @@ their package's loadpath (i.e. the lib/ directory) and potentially clobber
 a file of the same name in some one else's library.
 
 Here's an example irb session that demonstrate the issue. Here I already added
-a `matrix.rb` file, the did nothing but <code>puts "HERE!"</code>, to the +cuts+
+a `matrix.rb` file, that does nothing but <code>puts "HERE!"</code>, to the `cuts`
 gem and installed it.
 
     require 'rubygems'
@@ -30,7 +30,7 @@ suddenly stop working on another for no obvious reason.
 
 It is also worth noting that the recent crop of gem isolation systems, such as
 Bundler and Isolate, while serving to reduce the likelihood of possible name
-clashes still do not fully remedy the issue. They merely reduce the number to
+clashes still do not fully remedy the issue. They merely reduce the number of
 gems that could cause the problem for any given dependent application.
 
 
@@ -41,7 +41,7 @@ from a single gem and only that gem. It does so by adding a new valid syntax
 to Ruby's #load and #require methods. As an example, let's say we wanted to
 load the troff.rb script from the unroller library.
 
-  require 'unroller:troff'
+  require 'troff', :from => 'unroller'
 
 The colon is used to separate the gem name from the rest of the pathname.
 With this we can be 100% certain that the troff.rb file was required
@@ -156,10 +156,6 @@ gems installed, there are quite a few cases.
       jeventmachine.rb
       pr_eventmachine.rb
       rubyeventmachine.so
-
-    grosser-parallel-0.3.1/lib/:
-
-      parallel.rb
 
     hpricot-0.8.1/lib/:
 
