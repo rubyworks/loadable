@@ -14,7 +14,7 @@ module Gem
   end
 
   class Specification
-    # Return a list of actives specs, or latest version if not active.
+    # Return a list of active specs or latest version of spec if not active.
     def self.current_specs
       named = Hash.new{|h,k| h[k] = [] }
       each{ |spec| named[spec.name] << spec }
@@ -46,6 +46,10 @@ module Gem
     end
   end
 
+end
+
+
+
 =begin
   class GemPathSearcher
     # Return a list of matching files among active or latest gems.
@@ -73,4 +77,3 @@ module Gem
   end
 =end
 
-end

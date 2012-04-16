@@ -19,7 +19,7 @@ module Loadable
 
   # Iterate over all requirable files.
   #
-  #   LoadSystem.each{ |file| p file }
+  #   Loadable.each{ |file| p file }
   #
   # Note that esoteric load wedges may return a symbolic path rather than
   # an actual file path.
@@ -32,7 +32,7 @@ module Loadable
 
   # Search wedges for all matching paths.
   #
-  #   LoadSystem.search('detroit-*.rb')
+  #   Loadable.search('detroit-*.rb')
   #
   # Note that "esoteric" wedges might return a symbolic identifier rather
   # than an actual file path.

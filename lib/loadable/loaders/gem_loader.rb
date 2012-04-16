@@ -13,7 +13,7 @@ module Loadable
   #   require 'tracepoint', :from=>'tracepoint'
   #
   # The example would load the tracepoint file from the tracepoint gem.
-  # It will also fallback to the RubyWedge if 'tracepoint' is not found
+  # It will also fallback to the RubyLoader if 'tracepoint' is not found
   # among available gems. Loading can be limited to gems only by using
   # the `:gem` options instead.
   #
@@ -80,7 +80,7 @@ module Loadable
       end
     end
 
-    # Determine if this load4 wedge is applicable given the +fname+
+    # Determine if this load wedge is applicable given the +fname+
     # and +options+.
     #
     def apply?(fname, options={})

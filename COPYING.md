@@ -1,14 +1,21 @@
-# COPYRIGHT NOTICES
+# COPYRIGHT
 
-## Loadable
+## NOTICES
 
-| Project      | Loadable                                                 |
-|--------------|----------------------------------------------------------|
-| Copyright    | (c) 2010 Thomas Sawyer, Rubyworks                        |
-| License      | BSD-2-Clause                                             |
-| Wedsite      | http://rubyworks.github.com/loadable                     |
+### Loadable
 
-    Copyright 2010 Rubyworks, Thomas Sawyer. All rights reserved.
+http://rubyworks.github.com/loadable
+
+    Copyright 2010 Rubyworks. All rights reserved.
+
+    License BSD-2-Clause.
+
+
+## LICENSES
+
+### BSD-2-Clause
+
+http://www.spdx.org/licenses/BSD-2-Clause
 
     Redistribution and use in source and binary forms, with or without modification, are
     permitted provided that the following conditions are met:
@@ -30,4 +37,5 @@
     NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
     ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-    (http://www.spdx.org/licenses/BSD-2-Clause)
+
+
