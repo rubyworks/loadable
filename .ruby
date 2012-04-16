@@ -9,8 +9,6 @@ copyrights:
 - holder: Thomas Sawyer, RubyWorks
   year: '2010'
   license: BSD-2-Clause
-replacements: []
-alternatives: []
 requirements:
 - name: detroit
   groups:
@@ -29,17 +27,28 @@ requirements:
   - build
   development: true
 dependencies: []
+alternatives: []
 conflicts: []
 repositories:
 - uri: git://github.com/rubyworks/loadable.git
   scm: git
   name: upstream
 resources:
-  home: http://rubyworks.github.com/loadable
-  code: http://github.com/rubyworks/loadable
-  docs: http://rubydoc.info/github/rubyworks/loadable/master/frames
-  mail: http://groups.google.com/group/rubyworks-mailinglist
-  chat: irc://irc.freenode.net/rubyworks
+- uri: http://rubyworks.github.com/loadable
+  name: home
+  type: home
+- uri: http://github.com/rubyworks/loadable
+  name: code
+  type: code
+- uri: http://rubydoc.info/github/rubyworks/loadable/master/frames
+  name: docs
+  type: docs
+- uri: http://groups.google.com/group/rubyworks-mailinglist
+  name: mail
+  type: mail
+- uri: irc://irc.freenode.net/rubyworks
+  name: chat
+  type: chat
 extra: {}
 load_path:
 - lib
@@ -52,4 +61,4 @@ name: loadable
 description: Loadable modifieds Ruby's load/require system to handle "load wedges",
   which work much like routes in web frameworks, but in this case determine which
   files get loaded.
-date: '2011-11-11'
+date: '2012-04-16'

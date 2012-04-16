@@ -7,17 +7,23 @@ module DotRuby
   #
   class GemSpec
 
-    # For which revision of .ruby is this gemspec intended?
-    REVISION ||= 0
+    #
+    DOTRUBY = '{../,}.ruby' unless defined?(DOTRUBY)
 
     #
-    PATTERNS ||= {
+    MANIFEST = '{../,}manifest{,.txt}' unless defined?(MANIFEST)
+
+    # For which revision of .ruby is this gemspec intended?
+    REVISION = 0 unless defined?(REVISION)
+
+    #
+    PATTERNS = {
       :bin_files  => 'bin/*',
       :lib_files  => 'lib/{**/}*.rb',
       :ext_files  => 'ext/{**/}extconf.rb',
       :doc_files  => '*.{txt,rdoc,md,markdown,tt,textile}',
       :test_files => '{test/{**/}*_test.rb,spec/{**/}*_spec.rb}'
-    }
+    } unless defined?(PATTERNS)
 
     #
     def self.instance
@@ -30,8 +36,8 @@ module DotRuby
 
     #
     def initialize
-      @metadata = YAML.load_file('.ruby')
-      @manifest = Dir.glob('manifest{,.txt}', File::FNM_CASEFOLD).first
+      @metadata = YAML.load_file(Dir.glob(DOTRUBY).first)
+      @manifest = Dir.glob(MANIFEST, File::FNM_CASEFOLD).first
 
       if @metadata['revision'].to_i != REVISION
         warn "You have the wrong revision. Trying anyway..."
@@ -118,6 +124,8 @@ module DotRuby
         gemspec.licenses = metadata['copyrights'].map{ |c| c['license'] }.compact
 
         metadata['requirements'].each do |req|
+          next if req['optional']
+
           name    = req['name']
           version = req['version']
           groups  = req['groups'] || []
@@ -157,7 +165,7 @@ module DotRuby
         end
 
         # determine homepage from resources
-        homepage = metadata['resources'].find{ |key, url| key =~ /^home/ }
+        homepage = metadata['resources'].find{ |r| r['type'] =~ /^home/ || r['name'] =~ /^hone|web/ }
         gemspec.homepage = homepage.last if homepage
 
         gemspec.require_paths        = metadata['load_path'] || ['lib']
