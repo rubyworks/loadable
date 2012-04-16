@@ -1,18 +1,11 @@
 # Loadable
 
-## 1 Overview
-
-| Project      | Loadable                                                 |
-|--------------|----------------------------------------------------------|
-| Author       | Thomas Sawyer                                            |
-| License      | BSD-2-Clause                                             |
-| Copyright    | (c) 2010 Thomas Sawyer                                   |
-| Website      | http://github.com/rubyworks/loadable                     |
-| Development  | http://github.com/rubyworks/loadable                     |
-| Mailing-List | http://groups.google.com/group/rubyworks-mailinglist     |
+[Website](http://github.com/rubyworks/loadable) /
+[Development](http://github.com/rubyworks/loadable) /
+[Mailing List](http://groups.google.com/group/rubyworks-mailinglist)
 
 
-## 2 Description
+## 1 Description
 
 The Loadable gem provides a more robust and convenient means of augmenting
 Ruby's load system, namely the `load` and `require` methods. Rather than
@@ -22,7 +15,14 @@ that control the routing of require and load calls.
 In addition, the Loadable gem includes two pre-made load hooks that can be
 used to prevent name clashes between Ruby's standard library and gem packages
 (see INFRACTIONS.md for more on this). There is also a load hook for
-for developers to make it trivial to make vendored sub-projects loadable.
+developers to make vendored sub-projects loadable.
+
+
+## 2 Features
+
+* Safely augment Ruby's load system.
+* Prevent library name clashes.
+* Search load locations.
 
 
 ## 3 Usage
