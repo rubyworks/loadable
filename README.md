@@ -5,7 +5,7 @@
 
 # Loadable
 
-*Reliable load wedging for Ruby*
+*Safely Customize Ruby's Load System*
 
 <br/>
 
