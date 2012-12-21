@@ -3,7 +3,7 @@
 ## 1.2.1 / 2012-12-21
 
 Long overdo bug fix release. This release fixes a typo in the
-rubygems search funciton.
+rubygems search function.
 
 Changes:
 

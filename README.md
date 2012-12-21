@@ -107,7 +107,7 @@ a bit easier. Load hooks can be written without it, however the mixin
 provides a few methods that are often useful to any load hook. An example is
 the `lookup` method used in the above example, which will search a
 load path in accordance with the Ruby's built-in require and load lookup
-procedures, i.e. automatically trying defualt extensions like `.rb`.
+procedures, i.e. automatically trying default extensions like `.rb`.
 
 You might wonder how the single method, `#call`, handles both load and require
 operations. The secret is in the `options` hash. If <code>options[:load]</code>
@@ -126,7 +126,7 @@ falls back to the original `#load` and `#require` calls, via an instance of
 ## 4 Built-in Loaders
 
 The Loadable gem provides three special loaders out-of-the-box: the `RubyLoader`,
-the `GemLoader` and the `VendorLoader`. The first two are probably not exaclty
+the `GemLoader` and the `VendorLoader`. The first two are probably not exactly
 what you think they are, going just by their names, so keep reading...
 
 ### 4.1 RubyLoader
@@ -179,11 +179,11 @@ to make this more convenient.
 
 ## 5 Development
 
-Source code for Loadbable is hosted by [GitHub](http://github.com/rubyworks/loadable).
+Source code for Loadable is hosted by [GitHub](http://github.com/rubyworks/loadable).
 
 If you come across any issues, we encourage you to fork the repository and 
 submit a pull request with the fix. When submitting a pull request, it is best
-if the changes are orgnanized into a new topic branch.
+if the changes are organized into a new topic branch.
 
 If you don't have time to code up patches yourself, please do not hesitate to
 simply report the issue on the [issue tracker](http://github.com/rubyworks/loadable/issues).
