@@ -57,7 +57,7 @@ copyrights:
 created: '2010-07-21'
 summary: Safely Customize Ruby's Load System
 title: Loadable
-version: 1.2.0
+version: 1.2.1
 name: loadable
 description: Loadable modifieds Ruby's load/require system to handle "load wedges",
   which work much like routes in web frameworks, but in this case determine which
