@@ -35,14 +35,17 @@ developers to make vendored sub-projects loadable.
 
 Installing via RubyGems follows the usual pattern.
 
-    $ gem install loadable
+    gem install loadable
 
 To automatically load both the Gem and Ruby hooks, and the entire Loadable
 system, add `loadable` to your RUBYOPT environment variable.
 
-    $ export RUBYOPT="-rloadable"
+    export RUBYOPT="-rloadable"
 
-Place this in your shell's configuration file, such as `~/.bashrc`.
+Place this in your shell's configuration file, such as `~/.bashrc`. For csh 
+syntax (e.g. in `~/.cshrc`) use:
+
+    setenv RUBYOPT "-rloadable"
 
 If you do not want the default setup you can `require 'loadable/system'` instead.
 This will load in Loadable system, but only add an `OriginalLoader` to the
@@ -57,7 +60,7 @@ into a more generic tool, useful for writing any kind of plug-in load
 router. 
 
 The code for the Ruby hook serves as a good example of writing a load hook.
-(Note this is leaves out a few details of the real class for simplicity sake.)
+(Note this is leaves out a few details of the real class for simplicity's sake.)
 
     require 'rbconfig'
     require 'loadable/mixin'
@@ -93,8 +96,8 @@ domain.
 
 Under the hood, this simply appends the instance to the `$LOADERS` global variable.
 
-Loaders, also called load hooks, are easy to write as their interface is very
-simple. Any object the responds to #call, taking parameters of 
+Loaders, also called load hooks or wedges, are easy to write as their interface
+is very simple. Any object that responds to #call, taking parameters of 
 <code>(fname, options={})</code>, can be used as a load hook. A load hook
 should also support `#each(options={}, &block)` which is used to iterate over
 all requirable files a loader supports.
@@ -116,13 +119,13 @@ then the load was successful, and the loop can break. If it is `false` it means
 the loading has already been handled and the loop can also break. But if the
 return value is `nil`, it means the hook does not apply and the loop should
 continue. If all hooks have been tried and all have returned `nil` then it
-falls back to the original `#load` and `#require` calls, via an instance
+falls back to the original `#load` and `#require` calls, via an instance of
 `OriginalLoader` which should always be the last loader in the `$LOADERS` list.
 
 
 ## 4 Built-in Loaders
 
-The Loadable gem provides three special loaders out-of-the-box, the `RubyLoader`,
+The Loadable gem provides three special loaders out-of-the-box: the `RubyLoader`,
 the `GemLoader` and the `VendorLoader`. The first two are probably not exaclty
 what you think they are, going just by their names, so keep reading...
 
@@ -156,7 +159,7 @@ raise a load error.
     require 'string/does_not_exit', :gem=>'facets'
 
 The Gem hook also supports version constraints, so you do not have to use 
-`gem()` method for one off requires from a given gem.
+`gem()` method for one-off requires from a given gem.
 
     require 'string/margin', :from=>'facets', :version=>'~>2.8'
 
@@ -178,7 +181,7 @@ to make this more convenient.
 
 Source code for Loadbable is hosted by [GitHub](http://github.com/rubyworks/loadable).
 
-If you has come across and issues, we encourage you to fork the repository and 
+If you come across any issues, we encourage you to fork the repository and 
 submit a pull request with the fix. When submitting a pull request, it is best
 if the changes are orgnanized into a new topic branch.
 

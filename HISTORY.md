@@ -7,7 +7,7 @@ rubygems search funciton.
 
 Changes:
 
-* Fix bug in rubygems seach function.
+* Fix bug in rubygems search function.
 
 
 ## 1.2.0 / 2011-10-15
