@@ -1,8 +1,11 @@
+[Website](http://github.com/rubyworks/loadable) /
+[Report Issue](http://github.com/rubyworks/loadable/issues) /
+[Source Code](http://github.com/rubyworks/loadable)
+( [![Build Status](https://secure.travis-ci.org/rubyworks/loadable.png)](http://travis-ci.org/rubyworks/loadable) )
+
 # Loadable
 
-[Website](http://github.com/rubyworks/loadable) /
-[Development](http://github.com/rubyworks/loadable) /
-[Mailing List](http://groups.google.com/group/rubyworks-mailinglist)
+*Reliable load wedging for Ruby*
 
 
 ## 1 Description
