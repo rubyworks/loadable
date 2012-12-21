@@ -1,4 +1,5 @@
-#!mast .yardopts .ruby bin lib spec test [A-Z]*.*
+#!mast .index .yardopts .ruby bin demo lib share spec test [A-Z]*.*
+.index
 .yardopts
 .ruby
 lib/loadable/class_require.rb
@@ -22,7 +23,7 @@ spec/gem_loader_spec.rb
 spec/helper.rb
 spec/ruby_loader_spec.rb
 spec/vendor_loader_spec.rb
-COPYING.md
+LICENSE.txt
 HISTORY.md
 README.md
 INFRACTIONS.md
