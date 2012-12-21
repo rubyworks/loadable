@@ -7,13 +7,14 @@
 
 *Reliable load wedging for Ruby*
 
+<br/>
 
 ## 1 Description
 
 The Loadable gem provides a more robust and convenient means of augmenting
 Ruby's load system, namely the `load` and `require` methods. Rather than
-alias and override these methods, Loadable keeps a list of *load hooks*
-that control the routing of require and load calls.
+alias and override these methods, Loadable keeps a list of load hooks
+(also call *load wedges*) that control the routing of require and load calls.
 
 In addition, the Loadable gem includes two pre-made load hooks that can be
 used to prevent name clashes between Ruby's standard library and gem packages
