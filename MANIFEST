@@ -19,10 +19,11 @@ spec/fixture/abbrev.rb
 spec/fixture/ansi.rb
 spec/fixture/subpro/.ruby
 spec/fixture/subpro/lib/subpro.rb
-spec/gem_loader_spec.rb
 spec/helper.rb
-spec/ruby_loader_spec.rb
-spec/vendor_loader_spec.rb
+spec/runner.rb
+spec/spec_gem_loader.rb
+spec/spec_ruby_loader.rb
+spec/spec_vendor_loader.rb
 LICENSE.txt
 HISTORY.md
 README.md
