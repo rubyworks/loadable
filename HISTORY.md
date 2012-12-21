@@ -1,5 +1,15 @@
 # RELEASE HISTORY
 
+## 1.2.1 / 2012-12-21
+
+Long overdo bug fix release. This release fixes a typo in the
+rubygems search funciton.
+
+Changes:
+
+* Fix bug in rubygems seach function.
+
+
 ## 1.2.0 / 2011-10-15
 
 This release brings an almost complete rewrite of the API and
