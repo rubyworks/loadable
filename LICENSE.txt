@@ -1,8 +1,4 @@
-Loadable (http://rubyworks.github.com/loadable)
-
-Copyright 2010 Rubyworks. All rights reserved.
-
-Licensed BSD-2-Clause (http://www.spdx.org/licenses/BSD-2-Clause)
+BSD-2-Clause License
 
 Redistribution and use in source and binary forms, with or without modification, are
 permitted provided that the following conditions are met:

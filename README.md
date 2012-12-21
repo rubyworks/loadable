@@ -11,10 +11,10 @@
 
 ## 1 Description
 
-The Loadable gem provides a more robust and convenient means of augmenting
+The Loadable gem provides a robust and convenient means of augmenting
 Ruby's load system, namely the `load` and `require` methods. Rather than
 alias and override these methods, Loadable keeps a list of load hooks
-(also call *load wedges*) that control the routing of require and load calls.
+(also called *load wedges*) that control the routing of require and load calls.
 
 In addition, the Loadable gem includes two pre-made load hooks that can be
 used to prevent name clashes between Ruby's standard library and gem packages
@@ -188,9 +188,10 @@ simply report the issue on the [issue tracker](http://github.com/rubyworks/loada
 
 ## 6 Copyrights
 
-Copyright (c) 2010 Thomas Sawyer, Rubyworks
+Loadable if copyrighted open source software.
 
-Load is distributed under the terms of the **FreeBSD** license.
+    Copyright (c) 2010 Rubyworks
 
-See COPYING.md file for details.
+Load is distributed under the terms of the **BSD-2-Clause** license.
 
+See LICENSE.txt file for details.
